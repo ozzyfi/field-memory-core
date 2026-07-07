@@ -1,0 +1,273 @@
+import { useState } from "react";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { z } from "zod";
+import { toast } from "sonner";
+import { supabase } from "@/lib/supabase";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogDescription,
+  DialogFooter,
+} from "@/components/ui/dialog";
+import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import { Label } from "@/components/ui/label";
+
+import { computeQualityScore } from "@/lib/quality";
+import { uploadEvidenceFiles } from "@/lib/evidence";
+import { logAIQuery } from "@/lib/logAIQuery";
+import { useLanguage } from "@/hooks/useLanguage";
+
+const SOURCE_VALUES = ["whatsapp", "form", "manual"] as const;
+const STATUS_VALUES = ["open", "closed", "pending"] as const;
+
+const schema = z.object({
+  source: z.enum(SOURCE_VALUES),
+  raw_text: z.string().trim().min(1, "rec.rawRequired").max(5000),
+  location: z.string().trim().max(200).optional().or(z.literal("")),
+  topic: z.string().trim().max(200).optional().or(z.literal("")),
+  asset_code: z.string().trim().max(100).optional().or(z.literal("")),
+  action_required: z.string().trim().max(500).optional().or(z.literal("")),
+  root_cause: z.string().trim().max(500).optional().or(z.literal("")),
+  resolution: z.string().trim().max(500).optional().or(z.literal("")),
+  status: z.enum(STATUS_VALUES),
+});
+
+type FormValues = z.infer<typeof schema>;
+
+interface Props {
+  open: boolean;
+  onOpenChange: (v: boolean) => void;
+  orgId: string | null;
+  onCreated: () => void;
+}
+
+export function AddFieldRecordDialog({ open, onOpenChange, orgId, onCreated }: Props) {
+  const [submitting, setSubmitting] = useState(false);
+  const [files, setFiles] = useState<File[]>([]);
+  const { t } = useLanguage();
+  const {
+    register,
+    handleSubmit,
+    reset,
+    setValue,
+    watch,
+    formState: { errors },
+  } = useForm<FormValues>({
+    resolver: zodResolver(schema),
+    defaultValues: { source: "manual", status: "open", raw_text: "" },
+  });
+
+  const source = watch("source");
+  const status = watch("status");
+  const rootCause = watch("root_cause");
+
+  const onSubmit = async (values: FormValues) => {
+    if (!orgId) {
+      toast.error(t("rec.notReady"));
+      return;
+    }
+    setSubmitting(true);
+    try {
+      let assetId: string | null = null;
+      if (values.asset_code) {
+        const { data: asset } = await supabase
+          .from("assets")
+          .select("id")
+          .eq("org_id", orgId)
+          .eq("code", values.asset_code)
+          .maybeSingle();
+        if (asset?.id) {
+          assetId = asset.id;
+        } else {
+          const { data: created } = await supabase
+            .from("assets")
+            .insert({ org_id: orgId, code: values.asset_code, name: values.asset_code })
+            .select("id")
+            .single();
+          assetId = created?.id ?? null;
+        }
+      }
+
+      const payload = {
+        org_id: orgId,
+        source: values.source,
+        raw_text: values.raw_text,
+        location: values.location || null,
+        topic: values.topic || null,
+        asset_id: assetId,
+        action_required: values.action_required || null,
+        status: values.status,
+        closed_at: values.status === "closed" ? new Date().toISOString() : null,
+        evidence_urls: [] as string[],
+        root_cause: values.root_cause || null,
+        resolution: values.resolution || null,
+      };
+      // quality_score is computed server-side by a trigger; no need to send it.
+      const { data: inserted, error } = await supabase
+        .from("field_records")
+        .insert(payload)
+        .select("id")
+        .single();
+      if (error) throw error;
+      if (inserted?.id && files.length > 0) {
+        try {
+          const uploaded = await uploadEvidenceFiles(orgId, inserted.id, files);
+          const paths = uploaded.map((u) => u.storage_path);
+          // Mirror into evidence_urls for backward compatibility (quality/AI paths).
+          await supabase
+            .from("field_records")
+            .update({ evidence_urls: paths })
+            .eq("id", inserted.id);
+        } catch (upErr: any) {
+          toast.error(upErr?.message ?? "Evidence upload failed");
+        }
+      }
+      if (inserted?.id) {
+        supabase.functions.invoke("embed-record", { body: { record_id: inserted.id } }).catch(() => {});
+      }
+
+      logAIQuery({
+        orgId,
+        query_text: `Field record submitted (${values.source}, ${values.status})`,
+        sources_accessed: ["field_records"],
+      });
+      toast.success(t("rec.added"));
+      reset({ source: "manual", status: "open", raw_text: "" });
+      setFiles([]);
+      onOpenChange(false);
+      onCreated();
+    } catch (e: any) {
+      toast.error(e?.message ?? t("rec.addFailed"));
+    } finally {
+      setSubmitting(false);
+    }
+  };
+
+  return (
+    <Dialog open={open} onOpenChange={onOpenChange}>
+      <DialogContent className="sm:max-w-lg">
+        <DialogHeader>
+          <DialogTitle className="font-serif text-2xl">{t("rec.title")}</DialogTitle>
+          <DialogDescription>
+            {t("rec.desc")}
+          </DialogDescription>
+        </DialogHeader>
+
+        <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
+          <div className="grid grid-cols-2 gap-3">
+            <div className="space-y-1.5">
+              <Label className="text-xs">{t("rec.source")}</Label>
+              <Select value={source} onValueChange={(v) => setValue("source", v as any)}>
+                <SelectTrigger><SelectValue /></SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="whatsapp">{t("rec.srcWhatsapp")}</SelectItem>
+                  <SelectItem value="form">{t("rec.srcForm")}</SelectItem>
+                  <SelectItem value="manual">{t("rec.srcManual")}</SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
+            <div className="space-y-1.5">
+              <Label className="text-xs">{t("rec.status")}</Label>
+              <Select value={status} onValueChange={(v) => setValue("status", v as any)}>
+                <SelectTrigger><SelectValue /></SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="open">{t("status.open")}</SelectItem>
+                  <SelectItem value="closed">{t("status.closed")}</SelectItem>
+                  <SelectItem value="pending">{t("status.pending")}</SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
+          </div>
+
+          <div className="space-y-1.5">
+            <Label className="text-xs">{t("rec.rawText")} *</Label>
+            <Textarea rows={4} placeholder={t("rec.rawPlaceholder")} {...register("raw_text")} />
+            {errors.raw_text && <p className="text-xs text-primary">{t(errors.raw_text.message ?? "")}</p>}
+          </div>
+
+          <div className="grid grid-cols-2 gap-3">
+            <div className="space-y-1.5">
+              <Label className="text-xs">{t("rec.location")}</Label>
+              <Input placeholder={t("rec.locationPlaceholder")} {...register("location")} />
+            </div>
+            <div className="space-y-1.5">
+              <Label className="text-xs">{t("rec.topic")}</Label>
+              <Input placeholder={t("rec.topicPlaceholder")} {...register("topic")} />
+            </div>
+          </div>
+
+          <div className="grid grid-cols-2 gap-3">
+            <div className="space-y-1.5">
+              <Label className="text-xs">{t("rec.assetCode")}</Label>
+              <Input placeholder="örn. P-204" {...register("asset_code")} />
+            </div>
+            <div className="space-y-1.5">
+              <Label className="text-xs">{t("rec.action")}</Label>
+              <Input placeholder={t("rec.actionPlaceholder")} {...register("action_required")} />
+            </div>
+          </div>
+
+          <div className="space-y-1.5">
+            <Label className="text-xs">{t("rec.rootCause")}</Label>
+            <Textarea rows={2} maxLength={500} placeholder={t("rec.rootCausePlaceholder")} {...register("root_cause")} />
+            {status === "closed" && !rootCause?.trim() && (
+              <p className="text-xs text-muted-foreground">
+                {t("rec.rootCauseHint")}
+              </p>
+            )}
+          </div>
+
+          <div className="space-y-1.5">
+            <Label className="text-xs">{t("rec.resolution")}</Label>
+            <Textarea rows={2} maxLength={500} placeholder={t("rec.resolutionPlaceholder")} {...register("resolution")} />
+          </div>
+
+          <div className="space-y-1.5">
+            <Label className="text-xs">{t("rec.evidenceFiles")}</Label>
+            <Input
+              type="file"
+              multiple
+              accept="image/*,application/pdf"
+              onChange={(e) => setFiles(Array.from(e.target.files ?? []))}
+            />
+            {files.length > 0 && (
+              <p className="text-xs text-muted-foreground">
+                {files.length} {t("rec.filesSelected")}
+              </p>
+            )}
+          </div>
+
+
+
+          <DialogFooter>
+            <button
+              type="button"
+              onClick={() => onOpenChange(false)}
+              className="px-4 py-2 text-sm rounded-md border border-border hover:bg-muted"
+            >
+              {t("btn.cancel")}
+            </button>
+            <button
+              type="submit"
+              disabled={submitting}
+              className="px-4 py-2 text-sm rounded-md bg-primary text-primary-foreground hover:opacity-90 disabled:opacity-60"
+            >
+              {submitting ? t("rec.submitting") : t("rec.submit")}
+            </button>
+          </DialogFooter>
+        </form>
+      </DialogContent>
+    </Dialog>
+  );
+}

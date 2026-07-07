@@ -1,0 +1,250 @@
+import { useState } from "react";
+import { X, Sparkles, Database, Code2, ShieldCheck, MessageCircle, Repeat } from "lucide-react";
+import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from "recharts";
+import { Skeleton } from "@/components/ui/skeleton";
+import { ErrorState } from "@/components/ui/empty-state";
+import { workspaceName } from "@/lib/workspaceName";
+import { useAuth } from "@/contexts/AuthContext";
+import { useUserOrg } from "@/hooks/useUserOrg";
+import { useDashboardStats, type Period } from "@/hooks/useDashboardStats";
+import { Breadcrumb } from "@/pages/Index";
+import { Step } from "@/pages/screens/AIClientsScreen";
+import { useLanguage } from "@/hooks/useLanguage";
+import { DEMO_METRICS, DEMO_FIELD_FLOW, DEMO_RECURRING, PRIORITY_CLASS } from "@/lib/i18n";
+
+
+export function DashboardScreen({ showOnboarding, onClose }: { showOnboarding: boolean; onClose: () => void }) {
+  const [period, setPeriod] = useState<Period>("30d");
+  const { orgId } = useUserOrg();
+  const { user } = useAuth();
+  const { t, lang } = useLanguage();
+  const { data: stats, loading, error, reload } = useDashboardStats(period, orgId);
+
+  const fmt = (n: number) => n.toLocaleString();
+
+  return (
+    <div className="space-y-12">
+      {showOnboarding && (
+        <section className="rounded-lg border border-border bg-card p-8 relative">
+          <button onClick={onClose} className="absolute top-5 right-5 text-muted-foreground hover:text-foreground" aria-label="Close">
+            <X className="h-4 w-4" />
+          </button>
+          <h2 className="font-serif text-3xl text-foreground">{t("onboard.welcome")}</h2>
+          <p className="text-sm text-muted-foreground mt-2 max-w-2xl">
+            {t("brand.tagline")} — {t("dashboard.subtitle")}
+          </p>
+          <ol className="mt-6 space-y-3 max-w-2xl">
+            <Step n={1}>{t("onboard.dash.1")}</Step>
+            <Step n={2}>{t("onboard.dash.2")}</Step>
+            <Step n={3}>{t("onboard.dash.3")}</Step>
+          </ol>
+        </section>
+      )}
+
+      <div>
+        <Breadcrumb screen="dashboard" />
+        <div className="mt-4 flex flex-col md:flex-row md:items-end md:justify-between gap-4">
+          <div>
+            <h1 className="font-serif text-5xl text-foreground">{t("dashboard.title")}</h1>
+            <p className="text-sm text-muted-foreground mt-2">{t("dashboard.subtitle")}</p>
+          </div>
+          <div className="inline-flex border border-border rounded-md overflow-hidden text-sm bg-card">
+            {(["7d", "14d", "30d", "90d"] as Period[]).map((p) => (
+              <button
+                key={p}
+                onClick={() => setPeriod(p)}
+                className={`px-3 py-1.5 transition-colors ${period === p ? "bg-primary text-primary-foreground" : "hover:bg-muted"}`}
+              >
+                {p}
+              </button>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      {/* Retail central-office demo metrics */}
+      <section className="rounded-lg border border-border bg-card p-8">
+        <div className="flex items-center justify-between gap-4">
+          <div className="text-xs font-medium tracking-widest text-muted-foreground uppercase">{t("brand.tagline")}</div>
+          <span className="text-[11px] text-muted-foreground">{t("dashboard.sampleData")}</span>
+        </div>
+        <div className="mt-5 grid grid-cols-2 lg:grid-cols-6 gap-8">
+          {DEMO_METRICS[lang].map((m) => (
+            <Metric key={m.label} value={m.value} label={m.label} />
+          ))}
+        </div>
+      </section>
+
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
+        {/* Live field flow */}
+        <section className="lg:col-span-2 rounded-lg border border-border bg-card p-6">
+          <div className="flex items-center gap-2 mb-5">
+            <MessageCircle className="h-4 w-4 text-primary" />
+            <h3 className="text-sm font-medium text-foreground">{t("dashboard.liveFlow")}</h3>
+          </div>
+          <div className="space-y-4">
+            {DEMO_FIELD_FLOW[lang].map((f, i) => (
+              <div key={i} className="rounded-md border border-border p-4">
+                <div className="flex items-center justify-between gap-3">
+                  <span className="text-sm font-medium text-foreground">{f.name}</span>
+                  <span className={`text-[11px] px-2 py-0.5 rounded ${PRIORITY_CLASS[f.priority] ?? "bg-muted text-muted-foreground"}`}>
+                    {t("field.priority")}: {f.priority}
+                  </span>
+                </div>
+                <p className="text-sm text-muted-foreground mt-1.5 italic">“{f.message}”</p>
+                <div className="mt-3 grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-1 text-xs text-muted-foreground">
+                  <span><span className="text-foreground/70">{t("field.event")}:</span> {f.event}</span>
+                  <span><span className="text-foreground/70">{t("field.location")}:</span> {f.location}</span>
+                  <span className="sm:col-span-2"><span className="text-foreground/70">{t("field.action")}:</span> {f.action}</span>
+                </div>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        {/* Recurring topics */}
+        <section className="rounded-lg border border-border bg-card p-6">
+          <div className="flex items-center gap-2 mb-5">
+            <Repeat className="h-4 w-4 text-muted-foreground" />
+            <h3 className="text-sm font-medium text-foreground">{t("dashboard.recurring")}</h3>
+          </div>
+          <div className="divide-y divide-border">
+            {DEMO_RECURRING[lang].map((r, i) => (
+              <div key={i} className="flex items-center justify-between py-3 text-sm">
+                <span className="text-foreground">{r.topic}</span>
+                <span className="text-xs text-muted-foreground">{r.detail}</span>
+              </div>
+            ))}
+          </div>
+        </section>
+      </div>
+
+      {/* Admin channel insight (demo) */}
+      <section className="rounded-lg border border-border bg-card p-6">
+        <div className="flex items-start justify-between gap-4">
+          <div className="flex items-center gap-2">
+            <MessageCircle className="h-4 w-4 text-copper" />
+            <h3 className="text-sm font-medium text-foreground">{t("dash.admin.title")}</h3>
+          </div>
+          <span className="shrink-0 text-[11px] text-muted-foreground border border-border rounded-full px-2.5 py-0.5">
+            {t("dashboard.sampleData")}
+          </span>
+        </div>
+        <p className="text-sm text-muted-foreground mt-3 leading-relaxed max-w-3xl">{t("dash.admin.content")}</p>
+      </section>
+
+
+
+
+
+      {error ? (
+        <ErrorState message={error} onRetry={reload} />
+      ) : (
+      <section className="rounded-lg border border-border bg-card p-8">
+        <div className="text-xs font-medium tracking-widest text-muted-foreground uppercase">{t("dashboard.opsPerformance")} ({period})</div>
+        <div className="mt-5 grid grid-cols-2 lg:grid-cols-4 gap-8">
+          <Metric
+            value={loading || !stats ? <Skeleton className="h-9 w-20" /> : fmt(stats.totalRecords)}
+            label={t("metric.aiReady")}
+          />
+          <Metric
+            value={
+              loading || !stats ? <Skeleton className="h-9 w-20" /> : stats.avgQuality === null ? "—" : `${stats.avgQuality}%`
+            }
+            label={t("metric.qualityScore")}
+          />
+          <Metric
+            value={loading || !stats ? <Skeleton className="h-9 w-20" /> : fmt(stats.evidencedClosed)}
+            label={t("metric.evidencedClosure")}
+          />
+          <Metric
+            value={loading || !stats ? <Skeleton className="h-9 w-20" /> : fmt(stats.queriesInPeriod)}
+            label={t("metric.queriesPeriod")}
+          />
+        </div>
+
+        <div className="mt-8">
+          <div className="flex items-center gap-5 text-xs text-muted-foreground mb-3">
+            <span className="inline-flex items-center gap-1.5"><span className="h-2 w-2 rounded-full bg-primary" /> {t("chart.records")}</span>
+            <span className="inline-flex items-center gap-1.5"><span className="h-2 w-2 rounded-full bg-emerald-600" /> {t("chart.queries")}</span>
+          </div>
+          <DashboardChart loading={loading} series={stats?.series ?? []} totalRecords={stats?.totalRecords ?? 0} />
+        </div>
+      </section>
+      )}
+
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+        <SmallCard icon={Sparkles} title={t("card.aiClients.title")} text={t("card.aiClients.text")} />
+        <SmallCard icon={Database} title={t("card.dataSources.title")} text={t("card.dataSources.text")} />
+        <SmallCard icon={Code2} title={t("card.api.title")} text={t("card.api.text")} />
+        <SmallCard icon={ShieldCheck} title={t("card.quality.title")} text={t("card.quality.text")} />
+      </div>
+    </div>
+  );
+}
+
+export function Metric({ value, label }: { value: React.ReactNode; label: string }) {
+  return (
+    <div>
+      <div className="font-serif text-4xl text-foreground">{value}</div>
+      <div className="text-xs text-muted-foreground mt-1.5">{label}</div>
+    </div>
+  );
+}
+
+export function SmallCard({ icon: Icon, title, text }: { icon: React.ComponentType<{ className?: string }>; title: string; text: string }) {
+  return (
+    <div className="rounded-lg border border-border bg-card p-5 hover:border-foreground/20 transition-colors">
+      <Icon className="h-4 w-4 text-muted-foreground" />
+      <div className="font-serif text-xl text-foreground mt-3">{title}</div>
+      <p className="text-xs text-muted-foreground mt-2 leading-relaxed">{text}</p>
+    </div>
+  );
+}
+
+export function DashboardChart({
+  loading,
+  series,
+  totalRecords,
+}: {
+  loading: boolean;
+  series: { date: string; records: number; queries: number }[];
+  totalRecords: number;
+}) {
+  const { t } = useLanguage();
+  if (loading) {
+    return <Skeleton className="h-56 w-full" />;
+  }
+  if (totalRecords === 0) {
+    return (
+      <div className="h-56 w-full rounded-md border border-dashed border-border flex items-center justify-center">
+        <p className="text-sm text-muted-foreground">{t("chart.noData")}</p>
+      </div>
+    );
+  }
+  const data = series.map((p) => ({
+    ...p,
+    label: new Date(p.date).toLocaleDateString(undefined, { month: "short", day: "numeric" }),
+  }));
+  return (
+    <div className="h-56 w-full">
+      <ResponsiveContainer width="100%" height="100%">
+        <LineChart data={data} margin={{ top: 8, right: 8, bottom: 0, left: -20 }}>
+          <CartesianGrid stroke="hsl(var(--border))" strokeDasharray="2 4" vertical={false} />
+          <XAxis dataKey="label" tick={{ fontSize: 10, fill: "hsl(var(--muted-foreground))" }} tickLine={false} axisLine={false} />
+          <YAxis tick={{ fontSize: 10, fill: "hsl(var(--muted-foreground))" }} tickLine={false} axisLine={false} allowDecimals={false} />
+          <Tooltip
+            contentStyle={{
+              background: "hsl(var(--card))",
+              border: "1px solid hsl(var(--border))",
+              borderRadius: 6,
+              fontSize: 12,
+            }}
+          />
+          <Line type="monotone" dataKey="records" stroke="hsl(var(--primary))" strokeWidth={1.5} dot={false} name={t("chart.records")} />
+          <Line type="monotone" dataKey="queries" stroke="rgb(5, 150, 105)" strokeWidth={1.5} dot={false} name={t("chart.queries")} />
+        </LineChart>
+      </ResponsiveContainer>
+    </div>
+  );
+}
