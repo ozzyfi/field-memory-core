@@ -65,11 +65,11 @@ const MODE_META: { id: WorkflowId; icon: React.ComponentType<{ className?: strin
 
 const buildLocationOptions = (tr: boolean) => [
   tr ? "Tüm lokasyonlar" : "All locations",
-  "Kadıköy Mağazası",
-  "Bağdat Caddesi Mağazası",
-  "Ataşehir Mağazası",
-  "İstinyePark Mağazası",
-  "Cevahir Mağazası",
+  "Gebze Fabrikası",
+  "İzmir Tesisi",
+  "Bursa Fabrikası",
+  "Kocaeli Tesisi",
+  "Ankara Tesisi",
 ];
 const buildTimeOptions = (tr: boolean) => [
   tr ? "Son 90 gün" : "Last 90 days",
@@ -80,13 +80,13 @@ const buildTimeOptions = (tr: boolean) => [
 ];
 const buildSourceOptions = (tr: boolean) => [
   tr ? "Tüm veri kaynakları" : "All data sources",
-  "WhatsApp",
-  tr ? "POS / Kasa" : "POS / Register",
+  tr ? "Saha Bildirimleri" : "Field Alerts",
+  "CMMS",
   tr ? "Dokümanlar" : "Documents",
-  "CRM",
+  "SCADA / IoT",
   "Drive",
   "Sheets",
-  tr ? "Mağaza Dosyaları" : "Store Files",
+  tr ? "Ekipman Dosyaları" : "Equipment Files",
 ];
 
 /* -------------------- MODELS -------------------- */
