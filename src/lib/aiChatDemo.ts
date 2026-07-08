@@ -5,32 +5,32 @@
 export type WorkflowId = "general" | "quality" | "compliance" | "audit" | "storefile";
 
 export const DEMO_LOCATIONS = [
-  "Kadıköy Mağazası",
-  "Bağdat Caddesi Mağazası",
-  "Ataşehir Mağazası",
-  "İstinyePark Mağazası",
-  "Cevahir Mağazası",
+  "Gebze Fabrikası",
+  "İzmir Tesisi",
+  "Bursa Fabrikası",
+  "Kocaeli Tesisi",
+  "Ankara Tesisi",
 ];
 
 export const DEMO_TOPICS = [
-  "Faturasız iade talepleri",
-  "Kampanya fiyatı ile kasa fiyatı uyuşmazlığı",
-  "Stok farkları",
-  "Hasarlı ürün bildirimleri",
-  "Müşteri şikâyetleri",
-  "POS bağlantı sorunları",
-  "Klima ve mağaza teknik arızaları",
+  "Pompa titreşim ve arıza kayıtları",
+  "Rulman aşırı ısınma",
+  "Kompresör hava kaçağı",
+  "Kaplin hizalama işleri",
+  "Elektrik pano alarmı",
+  "Yedek parça değişim geçmişi",
+  "Önleyici bakım gecikmeleri",
   "Vardiya devir notları",
-  "Eksik fotoğraf/kanıtla kapatılan kayıtlar",
-  "Aynı prosedürün tekrar tekrar sorulması",
-  "Eğitim ihtiyacı oluşan mağazalar",
+  "Eksik fotoğraf/kanıtla kapatılan iş emirleri",
+  "Aynı arızanın tekrar tekrar oluşması",
+  "Teknisyen eğitim ihtiyacı",
 ];
 
 export const DEMO_SOURCES = [
-  "WhatsApp İş Mesajları",
-  "Kasa / POS Kayıtları",
-  "Mağaza Denetim Formları",
-  "Mobil Kanıt Akışı",
+  "Saha Bildirim Mesajları",
+  "CMMS İş Emri Kayıtları",
+  "Bakım Denetim Formları",
+  "Mobil Kanıt / Ölçüm Akışı",
 ];
 
 export type DemoRecord = { id: string; topic: string; location: string };
@@ -67,24 +67,24 @@ export function buildDemoAnswer(query: string, workflow: WorkflowId, range: stri
   // Topic focus from query keywords
   let focusTopics = DEMO_TOPICS;
   let theme = "operational records";
-  if (/(iade|return|fatura)/.test(q)) {
-    focusTopics = ["Faturasız iade talepleri", "Müşteri şikâyetleri", "Kampanya fiyatı ile kasa fiyatı uyuşmazlığı"];
-    theme = "return-related cases";
-  } else if (/(stok|stock|discrepan|fark)/.test(q)) {
-    focusTopics = ["Stok farkları", "Hasarlı ürün bildirimleri", "Vardiya devir notları"];
-    theme = "stock discrepancies";
-  } else if (/(şikâ|sikay|complaint|customer|müşteri)/.test(q)) {
-    focusTopics = ["Müşteri şikâyetleri", "Faturasız iade talepleri", "POS bağlantı sorunları"];
-    theme = "customer complaints";
-  } else if (/(photo|foto|kanıt|evidence)/.test(q)) {
-    focusTopics = ["Eksik fotoğraf/kanıtla kapatılan kayıtlar", "Hasarlı ürün bildirimleri"];
-    theme = "records closed without evidence";
-  } else if (/(eğitim|training|prosedür|procedure)/.test(q)) {
-    focusTopics = ["Aynı prosedürün tekrar tekrar sorulması", "Eğitim ihtiyacı oluşan mağazalar"];
-    theme = "training needs";
+  if (/(pompa|pump|titreşim|vibration)/.test(q)) {
+    focusTopics = ["Pompa titreşim ve arıza kayıtları", "Kaplin hizalama işleri", "Yedek parça değişim geçmişi"];
+    theme = "pump-related faults";
+  } else if (/(rulman|bearing|ısınma|overheat)/.test(q)) {
+    focusTopics = ["Rulman aşırı ısınma", "Önleyici bakım gecikmeleri", "Yedek parça değişim geçmişi"];
+    theme = "bearing overheat events";
+  } else if (/(kaçak|leak|kompresör|compressor|hava)/.test(q)) {
+    focusTopics = ["Kompresör hava kaçağı", "Önleyici bakım gecikmeleri"];
+    theme = "compressor / air leak issues";
+  } else if (/(photo|foto|kanıt|evidence|ölçüm)/.test(q)) {
+    focusTopics = ["Eksik fotoğraf/kanıtla kapatılan iş emirleri"];
+    theme = "work orders closed without evidence";
+  } else if (/(eğitim|training|prosedür|procedure|teknisyen)/.test(q)) {
+    focusTopics = ["Aynı arızanın tekrar tekrar oluşması", "Teknisyen eğitim ihtiyacı"];
+    theme = "technician training needs";
   } else if (/(risk|özet|summar)/.test(q)) {
     focusTopics = DEMO_TOPICS;
-    theme = "this period's operational risks";
+    theme = "this period's maintenance risks";
   }
 
   const records = pickRecords(seed, focusTopics, 4);

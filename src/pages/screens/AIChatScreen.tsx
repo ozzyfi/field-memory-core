@@ -65,11 +65,11 @@ const MODE_META: { id: WorkflowId; icon: React.ComponentType<{ className?: strin
 
 const buildLocationOptions = (tr: boolean) => [
   tr ? "Tüm lokasyonlar" : "All locations",
-  "Kadıköy Mağazası",
-  "Bağdat Caddesi Mağazası",
-  "Ataşehir Mağazası",
-  "İstinyePark Mağazası",
-  "Cevahir Mağazası",
+  "Gebze Fabrikası",
+  "İzmir Tesisi",
+  "Bursa Fabrikası",
+  "Kocaeli Tesisi",
+  "Ankara Tesisi",
 ];
 const buildTimeOptions = (tr: boolean) => [
   tr ? "Son 90 gün" : "Last 90 days",
@@ -80,13 +80,13 @@ const buildTimeOptions = (tr: boolean) => [
 ];
 const buildSourceOptions = (tr: boolean) => [
   tr ? "Tüm veri kaynakları" : "All data sources",
-  "WhatsApp",
-  tr ? "POS / Kasa" : "POS / Register",
+  tr ? "Saha Bildirimleri" : "Field Alerts",
+  "CMMS",
   tr ? "Dokümanlar" : "Documents",
-  "CRM",
+  "SCADA / IoT",
   "Drive",
   "Sheets",
-  tr ? "Mağaza Dosyaları" : "Store Files",
+  tr ? "Ekipman Dosyaları" : "Equipment Files",
 ];
 
 /* -------------------- MODELS -------------------- */
@@ -266,7 +266,7 @@ function AssistantBubble({
       </div>
       <div className="flex-1 min-w-0">
         <div className="flex items-center gap-2">
-          <span className="text-xs font-medium text-foreground">saha.team</span>
+          <span className="text-xs font-medium text-foreground">ToolA</span>
           {msg.demo && (
             <span className="rounded-full bg-amber-100 px-2 py-0.5 text-[10px] font-medium text-amber-800 border border-amber-200">
               {t("ai.demoData")}

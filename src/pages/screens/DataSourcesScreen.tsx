@@ -35,7 +35,7 @@ export function DataSourcesScreen() {
           <button onClick={() => { dismissOnboarding(ONBOARDING_DATASOURCES_KEY); setShowOnboarding(false); }} className="absolute top-5 right-5 text-muted-foreground hover:text-foreground">
             <X className="h-4 w-4" />
           </button>
-          <h2 className="font-serif text-3xl text-foreground">saha.team</h2>
+          <h2 className="font-serif text-3xl text-foreground">ToolA</h2>
           <p className="text-sm text-muted-foreground mt-1">{t("brand.tagline")}</p>
 
 

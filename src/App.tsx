@@ -12,7 +12,7 @@ import { LanguageProvider } from "@/hooks/useLanguage";
 
 const queryClient = new QueryClient();
 
-const APP_PATHS = ["/", "/branch-equipment", "/ai-chat", "/data-sources", "/ai-clients", "/data-quality", "/api", "/audit", "/billing"];
+const APP_PATHS = ["/", "/work-orders", "/ai-chat", "/data-sources", "/ai-clients", "/data-quality", "/api", "/audit", "/billing"];
 
 const App = () => (
   <QueryClientProvider client={queryClient}>
