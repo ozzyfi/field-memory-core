@@ -11,7 +11,7 @@ type Dict = Record<string, string>;
 const tr: Dict = {
   // Navigation
   "nav.dashboard": "Genel Bakış",
-  "nav.branch-equipment": "Mağaza Dosyaları",
+  "nav.work-orders": "İş Emri Atama ve Takip",
   "nav.ai-chat": "AI Asistan",
   "nav.data-sources": "Bilgi Kaynakları",
   "nav.ai-clients": "Entegrasyonlar",
@@ -23,12 +23,12 @@ const tr: Dict = {
   // Dashboard
   "dashboard.title": "Merkez Panel",
   "dashboard.subtitle":
-    "WhatsApp’tan gelen saha mesajlarını mağaza kayıtlarına, CRM notlarına ve yönetici içgörülerine dönüştürün.",
-  "metric.whatsapp": "WhatsApp mesajı",
-  "metric.records": "Açılan saha kaydı",
-  "metric.crm": "CRM’e işlenen not",
-  "metric.critical": "Açık kritik konu",
-  "metric.training": "Eğitim ihtiyacı",
+    "Sahadan gelen arıza ve bakım taleplerini iş emrine, ekipman geçmişine ve operasyon içgörülerine dönüştürün.",
+  "metric.whatsapp": "Gelen bakım talebi",
+  "metric.records": "Açılan iş emri",
+  "metric.crm": "Ekipman geçmişine işlenen kayıt",
+  "metric.critical": "Açık kritik iş",
+  "metric.training": "Teknisyen eğitim ihtiyacı",
   "metric.timeSaved": "Kurtarılan yönetici zamanı",
 
   // AI modes
@@ -36,10 +36,10 @@ const tr: Dict = {
   "mode.quality": "Kalite Kontrol",
   "mode.compliance": "Prosedür Kontrolü",
   "mode.audit": "Denetim Geçmişi",
-  "mode.storefile": "Mağaza Dosyası Analizi",
+  "mode.storefile": "Ekipman Dosyası Analizi",
 
   // Dashboard (existing metrics & chart)
-  "dashboard.lead": "AI-ready saha verisi, veri kalitesi ve kullanım performansı.",
+  "dashboard.lead": "AI-ready bakım verisi, veri kalitesi ve kullanım performansı.",
   "dashboard.opsPerformance": "Operasyon Performansı",
   "metric.aiReady": "AI-ready kayıt",
   "metric.qualityScore": "Veri kalite puanı",
@@ -47,17 +47,17 @@ const tr: Dict = {
   "metric.queriesPeriod": "Sorgu bu dönem",
   "chart.records": "Kayıt",
   "chart.queries": "Sorgu",
-  "chart.noData": "Henüz kayıt yok — ilk saha verisini ekleyin",
+  "chart.noData": "Henüz kayıt yok — ilk bakım kaydını ekleyin",
   "card.aiClients.title": "Entegrasyonlar",
   "card.aiClients.text": "Claude, ChatGPT, Copilot veya local LLM bağlantısı kurun.",
   "card.dataSources.title": "Bilgi Kaynakları",
-  "card.dataSources.text": "WhatsApp, servis formu, doküman, fotoğraf ve ERP verilerini bağlayın.",
+  "card.dataSources.text": "Saha bildirimleri, iş emri formları, ekipman dokümanları ve CMMS verilerini bağlayın.",
   "card.api.title": "API Anahtarları",
   "card.api.text": "Kurumsal AI ajanları için güvenli API ve MCP erişimi oluşturun.",
   "card.quality.title": "Kalite Puanı",
   "card.quality.text": "Eksik kök neden, kanıtsız kapanış ve eşleşmeyen kayıtları görün.",
   "ai.askTitle": "AI Asistan",
-  "ai.askSubtitle": "WhatsApp’tan gelen saha mesajlarını, mağaza kayıtlarını ve operasyon içgörülerini AI ile sorgulayın.",
+  "ai.askSubtitle": "İş emirleri, ekipman geçmişi, arıza tekrarları ve teknisyen performansını AI ile sorgulayın.",
   "ai.preparing": "Çalışma alanı hazırlanıyor…",
   "ai.generating": "Cevap oluşturuluyor…",
   "ai.history": "Geçmiş",
@@ -82,7 +82,6 @@ const tr: Dict = {
   "ai.demoData": "Örnek veri",
   "ai.records": "kayıt",
 
-
   // Status labels
   "status.open": "Açık",
   "status.closed": "Kapalı",
@@ -96,20 +95,20 @@ const tr: Dict = {
   "status.sample": "Örnek veri",
 
   // Buttons & empty states
-  "btn.addRecord": "Saha Kaydı Ekle",
+  "btn.addRecord": "Bakım Kaydı Ekle",
   "btn.openRecord": "Kaydı Aç",
-  "btn.whatsappReply": "WhatsApp Yanıtı",
-  "btn.crmNote": "CRM Notu",
+  "btn.whatsappReply": "Saha Yanıtı",
+  "btn.crmNote": "Ekipman Notu",
   "btn.viewDetails": "Detayları Gör",
   "btn.cancel": "İptal",
   "btn.contact": "Bize ulaşın",
-  "empty.records": "Henüz saha kaydı yok. Demo için ilk mağaza olayını ekleyin.",
+  "empty.records": "Henüz bakım kaydı yok. Demo için ilk arıza kaydını ekleyin.",
 
   // Branding
-  "brand.tagline": "WhatsApp tabanlı saha hafızası",
+  "brand.tagline": "AI destekli bakım ve iş emri yönetimi",
 
   // Sidebar
-  "sidebar.records": "Saha kaydı",
+  "sidebar.records": "Bakım kaydı",
   "sidebar.recordsLeft": "kayıt hakkı kaldı",
   "sidebar.loading": "Yükleniyor…",
   "sidebar.credit": "Kredi",
@@ -120,57 +119,57 @@ const tr: Dict = {
   // Dashboard demo widgets
   "dashboard.sampleData": "Örnek panel verisidir.",
   "dashboard.liveFlow": "Canlı Saha Akışı",
-  "dashboard.recurring": "Tekrar Eden Konular",
+  "dashboard.recurring": "Tekrar Eden Arızalar",
   "field.event": "Olay",
   "field.location": "Lokasyon",
   "field.priority": "Öncelik",
   "field.action": "Aksiyon",
-  "field.times": "kez soruldu",
+  "field.times": "kez raporlandı",
   "field.recordsCount": "kayıt",
 
   // Data Sources
   "ds.title": "Bilgi Kaynakları",
-  "ds.subtitle": "WhatsApp mesajları, prosedür dokümanları ve operasyon sistemlerini saha hafızasına bağlayın.",
-  "ds.whatsapp": "WhatsApp Kanalı",
-  "ds.knowledge": "Bilgi Kaynakları",
+  "ds.subtitle": "Saha bildirimlerini, bakım prosedürlerini ve operasyon sistemlerini ToolA'ya bağlayın.",
+  "ds.whatsapp": "Saha Bildirim Kanalları",
+  "ds.knowledge": "Teknik Dokümanlar",
   "ds.operations": "Operasyon Sistemleri",
-  "ds.recent": "Son Saha Kayıtları",
+  "ds.recent": "Son Bakım Kayıtları",
   "ds.contactTitle": "Daha fazla erişim için bize ulaşın",
-  "ds.contactText": "Ek mağaza, bölge ve operasyon veri kaynakları için kurumsal erişim açılabilir.",
+  "ds.contactText": "Ek tesis, bölge ve CMMS/ERP veri kaynakları için kurumsal erişim açılabilir.",
   "status.syncing": "Senkronize ediliyor",
   "ds.noLocation": "Lokasyon belirtilmedi",
 
   // Add Field Record dialog
-  "rec.title": "Yeni Saha Kaydı Ekle",
-  "rec.desc": "Manuel saha kaydı oluşturun — AI sorgularına anında dahil olur.",
+  "rec.title": "Yeni Bakım Kaydı Ekle",
+  "rec.desc": "Manuel bakım / arıza kaydı oluşturun — AI sorgularına anında dahil olur.",
   "rec.source": "Kaynak",
   "rec.status": "Durum",
   "rec.rawText": "Ham metin",
-  "rec.rawPlaceholder": "Ham metin veya mesaj içeriği",
-  "rec.location": "Lokasyon",
-  "rec.locationPlaceholder": "örn. Kadıköy Mağazası",
+  "rec.rawPlaceholder": "Arıza açıklaması veya saha mesajı",
+  "rec.location": "Lokasyon / Tesis",
+  "rec.locationPlaceholder": "örn. Gebze Fabrikası – Hat 2",
   "rec.topic": "Konu",
-  "rec.topicPlaceholder": "örn. İade prosedürü",
-  "rec.assetCode": "Ekipman / Ürün kodu",
+  "rec.topicPlaceholder": "örn. Pompa titreşimi",
+  "rec.assetCode": "Ekipman kodu",
   "rec.action": "Aksiyon",
   "rec.actionPlaceholder": "Yapılması gereken",
   "rec.rootCause": "Kök Neden",
-  "rec.rootCausePlaceholder": "Sorunun kök nedeni",
-  "rec.rootCauseHint": "Kapatılan kayıtlarda kök neden önerilir",
+  "rec.rootCausePlaceholder": "Arızanın kök nedeni",
+  "rec.rootCauseHint": "Kapatılan iş emirlerinde kök neden önerilir",
   "rec.resolution": "Çözüm / Kapanış Notu",
-  "rec.resolutionPlaceholder": "Yapılan çözüm veya kapanış detayı",
+  "rec.resolutionPlaceholder": "Yapılan bakım veya onarım detayı",
   "rec.evidenceFiles": "Kanıt Dosyaları (resim / PDF)",
   "rec.filesSelected": "dosya seçildi",
   "rec.submit": "Kaydı Ekle",
   "rec.submitting": "Ekleniyor…",
-  "rec.srcWhatsapp": "WhatsApp Mesajı",
-  "rec.srcForm": "Servis Formu",
+  "rec.srcWhatsapp": "Saha Bildirimi",
+  "rec.srcForm": "İş Emri Formu",
   "rec.srcManual": "Manuel Giriş",
 
   // Login
   "login.signin": "Giriş yap",
   "login.signup": "Hesap oluştur",
-  "login.tagline": "WhatsApp tabanlı saha hafızası",
+  "login.tagline": "AI destekli bakım ve iş emri yönetimi",
   "login.email": "E-posta",
   "login.password": "Parola",
   "login.wait": "Lütfen bekleyin…",
@@ -182,25 +181,25 @@ const tr: Dict = {
   "login.authFailed": "Kimlik doğrulama başarısız",
 
   // Onboarding
-  "onboard.welcome": "ToolA’e hoş geldiniz",
-  "onboard.dash.1": "WhatsApp kanalını bağla",
-  "onboard.dash.2": "Mağaza mesajlarını kayıt ve aksiyona dönüştür",
-  "onboard.dash.3": "Merkez panelden tekrar eden konuları ve eğitim ihtiyaçlarını takip et",
-  "onboard.ds": "WhatsApp kanalınızı, prosedür dokümanlarınızı ve operasyon sistemlerinizi bağlayın.",
+  "onboard.welcome": "ToolA'ya hoş geldiniz",
+  "onboard.dash.1": "Saha ve CMMS kaynaklarını bağlayın",
+  "onboard.dash.2": "Gelen bildirimleri iş emrine ve aksiyona dönüştürün",
+  "onboard.dash.3": "Merkez panelden tekrar eden arızaları ve teknisyen performansını takip edin",
+  "onboard.ds": "Saha bildirim kanallarınızı, bakım dokümanlarınızı ve operasyon sistemlerinizi bağlayın.",
 
   // Data Quality
   "dq.title": "Veri Kalitesi",
-  "dq.subtitle": "Sahadan gelen verinin AI tarafından güvenilir kullanılabilirliğini ölçün.",
+  "dq.subtitle": "Sahadan gelen bakım verisinin AI tarafından güvenilir kullanılabilirliğini ölçün.",
   "dq.runAudit": "Analizi çalıştır",
   "dq.updated": "Analiz güncellendi",
   "dq.qualityScore": "Kalite Puanı",
   "dq.qualityScoreText": "Genel AI-ready veri kalitesi.",
   "dq.evidenced": "Kanıtlı Kapanış",
-  "dq.evidencedText": "Fotoğraf, ses veya ölçümle kapanan işler.",
+  "dq.evidencedText": "Fotoğraf, ölçüm veya rapor ile kapanan işler.",
   "dq.missingRoot": "Eksik Kök Neden",
-  "dq.missingRootText": "Kapanmış ama kök nedeni eksik işler.",
+  "dq.missingRootText": "Kapanmış ama kök nedeni eksik iş emirleri.",
   "dq.unmatched": "Eşleşmeyen Kanıt",
-  "dq.unmatchedText": "İş veya ekipmana bağlanmamış fotoğraf/ses kayıtları.",
+  "dq.unmatchedText": "İş emri veya ekipmana bağlanmamış fotoğraf/ölçüm.",
   "dq.fixSuggestions": "Düzeltme önerileri",
   "dq.allReady": "Tüm kayıtlar AI-ready",
   "dq.allReadyDesc": "İyi iş — düzeltilecek bir kayıt bulunamadı.",
@@ -216,7 +215,7 @@ const tr: Dict = {
 
   // Audit
   "audit.title": "Denetim Kayıtları",
-  "audit.subtitle": "Hangi AI client, hangi saha verisine, hangi kaynak üzerinden erişti?",
+  "audit.subtitle": "Hangi AI client, hangi bakım verisine, hangi kaynak üzerinden erişti?",
   "audit.searchPlaceholder": "Sorgu içinde ara…",
   "audit.all": "Tümü",
   "audit.noQueries": "Henüz AI sorgusu yapılmadı",
@@ -230,10 +229,10 @@ const tr: Dict = {
   "audit.user": "Kullanıcı",
 
   // API / MCP
-  "api.subtitle": "ToolA saha hafızasını kurumsal agent’lara ve kendi uygulamalarınıza açın.",
+  "api.subtitle": "ToolA bakım hafızasını kurumsal agent'lara ve kendi uygulamalarınıza açın.",
   "api.createKey": "Anahtar oluştur",
   "api.mcpEndpoint": "MCP Endpoint",
-  "api.mcpDesc": "Claude, Cursor, ChatGPT connector veya custom agent’lar için model-bağımsız erişim.",
+  "api.mcpDesc": "Claude, Cursor, ChatGPT connector veya custom agent'lar için model-bağımsız erişim.",
   "api.availableTools": "Mevcut araçlar",
   "api.tool": "Araç",
   "api.description": "Açıklama",
@@ -255,18 +254,18 @@ const tr: Dict = {
 
   // AI Clients
   "aic.title": "Entegrasyonlar",
-  "aic.subtitle": "AI-ready saha hafızanızı istediğiniz yapay zekâ ile güvenli şekilde kullanın.",
+  "aic.subtitle": "AI-ready bakım hafızanızı istediğiniz yapay zekâ ile güvenli şekilde kullanın.",
   "aic.connect": "AI client bağla",
-  "aic.tryQuery": "Saha hafızanızı deneyin",
+  "aic.tryQuery": "Bakım hafızanızı deneyin",
   "aic.manage": "Bağlantıları yönet",
   "aic.notReady": "Çalışma alanı hazır değil",
-  "aic.claude": "MCP üzerinden saha hafızasına kaynaklı erişim.",
+  "aic.claude": "MCP üzerinden bakım hafızasına kaynaklı erişim.",
   "aic.chatgpt": "Enterprise connector veya API gateway ile sorgulama.",
-  "aic.copilot": "Microsoft ortamında izinli saha verisi erişimi.",
+  "aic.copilot": "Microsoft ortamında izinli bakım verisi erişimi.",
   "aic.localllm": "Veri dışarı çıkmadan kendi sunucunuzdaki modele bağlanın.",
 
   // Field record detail sheet
-  "detail.title": "Saha Kaydı",
+  "detail.title": "Bakım Kaydı",
   "detail.edit": "Düzenle",
   "detail.cancel": "Vazgeç",
   "detail.delete": "Sil",
@@ -300,26 +299,26 @@ const tr: Dict = {
 
   // Workspace dropdown (frontend-only)
   "ws.workspace": "Çalışma Alanı",
-  "ws.countries": "Ülke ve mağazalar",
-  "ws.channels": "WhatsApp kanalları",
+  "ws.countries": "Tesis ve lokasyonlar",
+  "ws.channels": "Saha kanalları",
   "ws.team": "Ekip ve roller",
   "ws.plan": "Plan / Kullanım",
   "ws.settings": "Workspace ayarları",
   "ws.soon": "Yakında",
 
-  // WhatsApp channel structure (demo)
-  "wcs.title": "WhatsApp Kanal Yapısı",
-  "wcs.subtitle": "Ülke bazlı saha kanalları ve ayrı admin bilgi güncelleme kanalıyla mağaza operasyonlarını yönetin.",
+  // Field channel structure (demo)
+  "wcs.title": "Saha Bildirim Kanal Yapısı",
+  "wcs.subtitle": "Tesis bazlı saha kanalları ve ayrı yönetici bilgi güncelleme kanalıyla bakım operasyonlarını yönetin.",
   "wcs.sample": "Örnek kurumsal yapı",
 
   // Phone mapping (demo)
   "pm.title": "Telefon Numarası → Rol ve Lokasyon Eşleştirme",
-  "pm.body": "WhatsApp’tan gelen telefon numarası, kişiyi tanımak için kullanılır. ToolA bu kişiyi rol, ülke, bölge, mağaza ve yetki bilgileriyle eşleştirir.",
+  "pm.body": "Sahadan gelen telefon numarası, kişiyi tanımak için kullanılır. ToolA bu kişiyi rol, tesis, hat ve yetki bilgileriyle eşleştirir.",
   "pm.example": "Örnek eşleştirme",
 
   // Knowledge update drafts (demo)
   "kud.title": "Bilgi Güncelleme Taslakları",
-  "kud.subtitle": "Admin WhatsApp kanalından gelen kampanya, prosedür ve dokümanlar onaydan sonra bilgi tabanına yayınlanır.",
+  "kud.subtitle": "Yönetici kanalından gelen prosedür, talimat ve dokümanlar onaydan sonra bilgi tabanına yayınlanır.",
   "kud.ai": "AI çıkarımı",
   "kud.preview": "Önizle",
   "kud.sendApproval": "Onaya Gönder",
@@ -327,19 +326,79 @@ const tr: Dict = {
   "kud.reject": "Reddet",
 
   // Dashboard admin channel insight (demo)
-  "dash.admin.title": "Admin Kanalından Gelen Güncellemeler",
-  "dash.admin.content": "Bu hafta 6 kampanya ve prosedür dokümanı admin WhatsApp kanalından alındı. 4 güncelleme onaylandı, 2 güncelleme çakışma kontrolünde.",
+  "dash.admin.title": "Yönetici Kanalından Gelen Güncellemeler",
+  "dash.admin.content": "Bu hafta 6 bakım prosedürü ve talimat dokümanı yönetici kanalından alındı. 4 güncelleme onaylandı, 2 güncelleme çakışma kontrolünde.",
 
   // Language switcher
   "lang.tr": "TR",
   "lang.en": "EN",
-};
 
+  // Work Orders screen
+  "wo.title": "İş Emri Atama ve Takip",
+  "wo.subtitle": "ToolA ile sohbet ederek iş emri oluşturun, en uygun teknisyeni önerin ve tek tıkla atayın.",
+  "wo.tab.new": "Yeni İş Emri",
+  "wo.tab.open": "Açık İş Emirleri",
+  "wo.tab.suggest": "Atama Önerileri",
+  "wo.chat.title": "ToolA ile iş emri oluştur",
+  "wo.chat.placeholder": "örn. Pompa P-204 için arıza kaydı oluştur, öncelik yüksek, uygun teknisyeni öner",
+  "wo.chat.send": "Gönder",
+  "wo.chat.quick": "Hızlı örnekler",
+  "wo.summary.title": "İş Emri Özeti",
+  "wo.summary.subtitle": "Yazdıkça sağda yapılandırılmış iş emri oluşur.",
+  "wo.f.type": "Tip",
+  "wo.f.title": "Başlık",
+  "wo.f.asset": "Ekipman",
+  "wo.f.location": "Lokasyon",
+  "wo.f.desc": "Açıklama",
+  "wo.f.priority": "Öncelik",
+  "wo.f.sla": "Hedef süre / SLA",
+  "wo.f.skill": "Gerekli yetkinlik",
+  "wo.f.suggested": "Önerilen teknisyenler",
+  "wo.f.assignee": "Atanan kişi",
+  "wo.f.reason": "Atama gerekçesi",
+  "wo.f.parts": "Gerekli ekipman / parça",
+  "wo.f.notes": "Notlar",
+  "wo.act.saveDraft": "Taslak kaydet",
+  "wo.act.create": "İş emri oluştur",
+  "wo.act.assign": "Ata ve bildir",
+  "wo.act.edit": "Düzenle",
+  "wo.type.fault": "Arıza",
+  "wo.type.maint": "Bakım",
+  "wo.type.install": "Kurulum",
+  "wo.type.test": "Test",
+  "wo.open.title": "Açık İş Emirleri",
+  "wo.open.col.id": "No",
+  "wo.open.col.title": "Başlık",
+  "wo.open.col.asset": "Ekipman",
+  "wo.open.col.assignee": "Atanan",
+  "wo.open.col.priority": "Öncelik",
+  "wo.open.col.status": "Durum",
+  "wo.open.col.age": "Süre",
+  "wo.st.open": "Açık",
+  "wo.st.assigned": "Atandı",
+  "wo.st.enroute": "Yolda",
+  "wo.st.onsite": "Sahada",
+  "wo.st.waiting": "Beklemede",
+  "wo.st.done": "Tamamlandı",
+  "wo.sug.title": "Atama İçgörüleri",
+  "wo.sug.reassign": "Yeniden atama gerekenler",
+  "wo.sug.overdue": "Geciken işler",
+  "wo.sug.busy": "Yoğun teknisyenler",
+  "wo.sug.available": "Uygun teknisyenler",
+  "wo.rec.title": "Önerilen teknisyen",
+  "wo.rec.reasons": "Öneri gerekçeleri",
+  "wo.rec.skill": "Uzmanlık uyumu",
+  "wo.rec.similar": "Benzer iş tecrübesi",
+  "wo.rec.load": "Mevcut iş yükü",
+  "wo.rec.avail": "Müsaitlik",
+  "wo.rec.near": "Lokasyona yakınlık",
+  "wo.rec.conflict": "Çakışma kontrolü",
+};
 
 const en: Dict = {
   // Navigation
   "nav.dashboard": "Overview",
-  "nav.branch-equipment": "Store Files",
+  "nav.work-orders": "Work Order Assignment",
   "nav.ai-chat": "AI Assistant",
   "nav.data-sources": "Knowledge Sources",
   "nav.ai-clients": "Integrations",
@@ -351,12 +410,12 @@ const en: Dict = {
   // Dashboard
   "dashboard.title": "Central Dashboard",
   "dashboard.subtitle":
-    "Turn WhatsApp field messages into store records, CRM notes, and management insights.",
-  "metric.whatsapp": "WhatsApp messages",
-  "metric.records": "Field records created",
-  "metric.crm": "CRM notes added",
-  "metric.critical": "Open critical issues",
-  "metric.training": "Training needs",
+    "Turn field fault and maintenance requests into work orders, equipment history, and operations insights.",
+  "metric.whatsapp": "Incoming requests",
+  "metric.records": "Work orders opened",
+  "metric.crm": "Equipment-history notes",
+  "metric.critical": "Open critical work",
+  "metric.training": "Technician training needs",
   "metric.timeSaved": "Manager time saved",
 
   // AI modes
@@ -364,10 +423,10 @@ const en: Dict = {
   "mode.quality": "Quality Review",
   "mode.compliance": "Procedure Check",
   "mode.audit": "Audit Trail",
-  "mode.storefile": "Store File Analysis",
+  "mode.storefile": "Equipment File Analysis",
 
   // Dashboard (existing metrics & chart)
-  "dashboard.lead": "AI-ready field data, data quality and usage performance.",
+  "dashboard.lead": "AI-ready maintenance data, data quality and usage performance.",
   "dashboard.opsPerformance": "Operations Performance",
   "metric.aiReady": "AI-ready records",
   "metric.qualityScore": "Data quality score",
@@ -375,17 +434,17 @@ const en: Dict = {
   "metric.queriesPeriod": "Queries this period",
   "chart.records": "Records",
   "chart.queries": "Queries",
-  "chart.noData": "No records yet — add your first field data",
+  "chart.noData": "No records yet — add your first maintenance record",
   "card.aiClients.title": "Integrations",
   "card.aiClients.text": "Connect Claude, ChatGPT, Copilot or a local LLM.",
   "card.dataSources.title": "Knowledge Sources",
-  "card.dataSources.text": "Connect WhatsApp, service forms, documents, photos and ERP data.",
+  "card.dataSources.text": "Connect field alerts, work-order forms, equipment docs and CMMS data.",
   "card.api.title": "API Keys",
   "card.api.text": "Create secure API and MCP access for enterprise AI agents.",
   "card.quality.title": "Quality Score",
   "card.quality.text": "See missing root causes, evidence-less closures and unmatched records.",
   "ai.askTitle": "AI Assistant",
-  "ai.askSubtitle": "Ask AI about WhatsApp field messages, store records, and operational insights.",
+  "ai.askSubtitle": "Query work orders, equipment history, recurring faults, and technician performance with AI.",
   "ai.preparing": "Preparing workspace…",
   "ai.generating": "Generating answer…",
   "ai.history": "History",
@@ -410,7 +469,6 @@ const en: Dict = {
   "ai.demoData": "Demo data",
   "ai.records": "records",
 
-
   // Status labels
   "status.open": "Open",
   "status.closed": "Closed",
@@ -424,20 +482,20 @@ const en: Dict = {
   "status.sample": "Sample data",
 
   // Buttons & empty states
-  "btn.addRecord": "Add Field Record",
+  "btn.addRecord": "Add Maintenance Record",
   "btn.openRecord": "Open Record",
-  "btn.whatsappReply": "WhatsApp Reply",
-  "btn.crmNote": "CRM Note",
+  "btn.whatsappReply": "Field Reply",
+  "btn.crmNote": "Equipment Note",
   "btn.viewDetails": "View Details",
   "btn.cancel": "Cancel",
   "btn.contact": "Contact us",
-  "empty.records": "No field records yet. Add the first store incident for the demo.",
+  "empty.records": "No maintenance records yet. Add the first fault report for the demo.",
 
   // Branding
-  "brand.tagline": "WhatsApp-based field memory",
+  "brand.tagline": "AI-powered maintenance and work-order management",
 
   // Sidebar
-  "sidebar.records": "Field records",
+  "sidebar.records": "Maintenance records",
   "sidebar.recordsLeft": "records remaining",
   "sidebar.loading": "Loading…",
   "sidebar.credit": "Credit",
@@ -448,57 +506,57 @@ const en: Dict = {
   // Dashboard demo widgets
   "dashboard.sampleData": "Sample dashboard data.",
   "dashboard.liveFlow": "Live Field Flow",
-  "dashboard.recurring": "Recurring Topics",
+  "dashboard.recurring": "Recurring Faults",
   "field.event": "Event",
   "field.location": "Location",
   "field.priority": "Priority",
   "field.action": "Action",
-  "field.times": "times asked",
+  "field.times": "times reported",
   "field.recordsCount": "records",
 
   // Data Sources
   "ds.title": "Knowledge Sources",
-  "ds.subtitle": "Connect WhatsApp messages, procedure documents, and operational systems to your field memory.",
-  "ds.whatsapp": "WhatsApp Channel",
-  "ds.knowledge": "Knowledge Sources",
+  "ds.subtitle": "Connect field alerts, maintenance procedures and operational systems to ToolA.",
+  "ds.whatsapp": "Field Alert Channels",
+  "ds.knowledge": "Technical Documents",
   "ds.operations": "Operational Systems",
-  "ds.recent": "Recent Field Records",
+  "ds.recent": "Recent Maintenance Records",
   "ds.contactTitle": "Contact us for more access",
-  "ds.contactText": "Enterprise access can be enabled for additional store, region and operations data sources.",
+  "ds.contactText": "Enterprise access can be enabled for additional facility, region and CMMS/ERP data sources.",
   "status.syncing": "Syncing",
   "ds.noLocation": "No location specified",
 
   // Add Field Record dialog
-  "rec.title": "Add New Field Record",
-  "rec.desc": "Create a manual field record — instantly included in AI queries.",
+  "rec.title": "Add New Maintenance Record",
+  "rec.desc": "Create a manual maintenance/fault record — instantly included in AI queries.",
   "rec.source": "Source",
   "rec.status": "Status",
   "rec.rawText": "Raw text",
-  "rec.rawPlaceholder": "Raw text or message content",
-  "rec.location": "Location",
-  "rec.locationPlaceholder": "e.g. Kadıköy Store",
+  "rec.rawPlaceholder": "Fault description or field message",
+  "rec.location": "Location / Facility",
+  "rec.locationPlaceholder": "e.g. Gebze Plant – Line 2",
   "rec.topic": "Topic",
-  "rec.topicPlaceholder": "e.g. Return procedure",
-  "rec.assetCode": "Equipment / Product code",
+  "rec.topicPlaceholder": "e.g. Pump vibration",
+  "rec.assetCode": "Equipment code",
   "rec.action": "Action",
   "rec.actionPlaceholder": "What needs to be done",
   "rec.rootCause": "Root Cause",
-  "rec.rootCausePlaceholder": "Root cause of the issue",
-  "rec.rootCauseHint": "Root cause is recommended for closed records",
+  "rec.rootCausePlaceholder": "Root cause of the fault",
+  "rec.rootCauseHint": "Root cause is recommended for closed work orders",
   "rec.resolution": "Resolution / Closing Note",
-  "rec.resolutionPlaceholder": "Resolution applied or closing detail",
+  "rec.resolutionPlaceholder": "Maintenance or repair detail",
   "rec.evidenceFiles": "Evidence Files (image / PDF)",
   "rec.filesSelected": "file(s) selected",
   "rec.submit": "Add Record",
   "rec.submitting": "Adding…",
-  "rec.srcWhatsapp": "WhatsApp Message",
-  "rec.srcForm": "Service Form",
+  "rec.srcWhatsapp": "Field Alert",
+  "rec.srcForm": "Work Order Form",
   "rec.srcManual": "Manual Entry",
 
   // Login
   "login.signin": "Sign in",
   "login.signup": "Create account",
-  "login.tagline": "WhatsApp-based field memory",
+  "login.tagline": "AI-powered maintenance and work-order management",
   "login.email": "Email",
   "login.password": "Password",
   "login.wait": "Please wait…",
@@ -511,24 +569,24 @@ const en: Dict = {
 
   // Onboarding
   "onboard.welcome": "Welcome to ToolA",
-  "onboard.dash.1": "Connect the WhatsApp channel",
-  "onboard.dash.2": "Turn store messages into records and actions",
-  "onboard.dash.3": "Track recurring topics and training needs from the central dashboard",
-  "onboard.ds": "Connect your WhatsApp channel, procedure documents, and operational systems.",
+  "onboard.dash.1": "Connect field and CMMS sources",
+  "onboard.dash.2": "Turn incoming alerts into work orders and actions",
+  "onboard.dash.3": "Track recurring faults and technician performance from the central dashboard",
+  "onboard.ds": "Connect your field alert channels, maintenance documents, and operational systems.",
 
   // Data Quality
   "dq.title": "Data Quality",
-  "dq.subtitle": "Measure how reliably AI can use the data coming from the field.",
+  "dq.subtitle": "Measure how reliably AI can use the maintenance data coming from the field.",
   "dq.runAudit": "Run audit",
   "dq.updated": "Analysis updated",
   "dq.qualityScore": "Quality Score",
   "dq.qualityScoreText": "Overall AI-ready data quality.",
   "dq.evidenced": "Evidenced Closures",
-  "dq.evidencedText": "Records closed with photo, audio or measurement.",
+  "dq.evidencedText": "Work closed with photo, measurement or report.",
   "dq.missingRoot": "Missing Root Cause",
-  "dq.missingRootText": "Closed records missing a root cause.",
+  "dq.missingRootText": "Closed work orders missing a root cause.",
   "dq.unmatched": "Unmatched Evidence",
-  "dq.unmatchedText": "Photo/audio not linked to a record or asset.",
+  "dq.unmatchedText": "Photo/measurement not linked to a work order or asset.",
   "dq.fixSuggestions": "Fix suggestions",
   "dq.allReady": "All records are AI-ready",
   "dq.allReadyDesc": "Good job — no records to fix were found.",
@@ -544,7 +602,7 @@ const en: Dict = {
 
   // Audit
   "audit.title": "Audit Log",
-  "audit.subtitle": "Which AI client accessed which field data, through which source?",
+  "audit.subtitle": "Which AI client accessed which maintenance data, through which source?",
   "audit.searchPlaceholder": "Search within queries…",
   "audit.all": "All",
   "audit.noQueries": "No AI queries yet",
@@ -558,7 +616,7 @@ const en: Dict = {
   "audit.user": "User",
 
   // API / MCP
-  "api.subtitle": "Open ToolA field memory to enterprise agents and your own apps.",
+  "api.subtitle": "Open ToolA maintenance memory to enterprise agents and your own apps.",
   "api.createKey": "Create key",
   "api.mcpEndpoint": "MCP Endpoint",
   "api.mcpDesc": "Model-agnostic access for Claude, Cursor, ChatGPT connector or custom agents.",
@@ -583,25 +641,25 @@ const en: Dict = {
 
   // AI Clients
   "aic.title": "Integrations",
-  "aic.subtitle": "Use your AI-ready field memory securely with any AI of your choice.",
+  "aic.subtitle": "Use your AI-ready maintenance memory securely with any AI of your choice.",
   "aic.connect": "Connect an AI client",
-  "aic.tryQuery": "Try your field memory",
+  "aic.tryQuery": "Try your maintenance memory",
   "aic.manage": "Manage connections",
   "aic.notReady": "Workspace not ready",
-  "aic.claude": "Sourced access to field memory via MCP.",
+  "aic.claude": "Sourced access to maintenance memory via MCP.",
   "aic.chatgpt": "Query through an enterprise connector or API gateway.",
-  "aic.copilot": "Permissioned field data access in the Microsoft environment.",
+  "aic.copilot": "Permissioned maintenance data access in the Microsoft environment.",
   "aic.localllm": "Connect to your own on-prem model without data leaving.",
 
   // Field record detail sheet
-  "detail.title": "Field Record",
+  "detail.title": "Maintenance Record",
   "detail.edit": "Edit",
   "detail.cancel": "Cancel",
   "detail.delete": "Delete",
   "detail.save": "Save",
   "detail.saving": "Saving…",
   "detail.deleting": "Deleting…",
-  "detail.assetId": "Asset ID",
+  "detail.assetId": "Equipment ID",
   "detail.evidence": "Evidence",
   "detail.uploading": "Uploading…",
   "detail.quality": "Quality",
@@ -628,26 +686,26 @@ const en: Dict = {
 
   // Workspace dropdown (frontend-only)
   "ws.workspace": "Workspace",
-  "ws.countries": "Countries and stores",
-  "ws.channels": "WhatsApp channels",
+  "ws.countries": "Facilities and locations",
+  "ws.channels": "Field channels",
   "ws.team": "Team and roles",
   "ws.plan": "Plan / Usage",
   "ws.settings": "Workspace settings",
   "ws.soon": "Coming soon",
 
-  // WhatsApp channel structure (demo)
-  "wcs.title": "WhatsApp Channel Structure",
-  "wcs.subtitle": "Manage store operations with country-based field channels and a separate admin knowledge update channel.",
+  // Field channel structure (demo)
+  "wcs.title": "Field Alert Channel Structure",
+  "wcs.subtitle": "Manage maintenance operations with facility-based field channels and a separate admin knowledge update channel.",
   "wcs.sample": "Sample enterprise setup",
 
   // Phone mapping (demo)
   "pm.title": "Phone Number → Role and Location Mapping",
-  "pm.body": "The incoming WhatsApp phone number is used to identify the contact. ToolA maps the contact to role, country, region, store, and permission scope.",
+  "pm.body": "The incoming field phone number is used to identify the contact. ToolA maps the contact to role, facility, line, and permission scope.",
   "pm.example": "Example mapping",
 
   // Knowledge update drafts (demo)
   "kud.title": "Knowledge Update Drafts",
-  "kud.subtitle": "Campaigns, procedures, and documents sent through the Admin WhatsApp channel are published to the knowledge base after approval.",
+  "kud.subtitle": "Procedures, instructions and documents received from the admin channel are published to the knowledge base after approval.",
   "kud.ai": "AI extraction",
   "kud.preview": "Preview",
   "kud.sendApproval": "Send for Approval",
@@ -656,143 +714,196 @@ const en: Dict = {
 
   // Dashboard admin channel insight (demo)
   "dash.admin.title": "Updates from Admin Channel",
-  "dash.admin.content": "This week, 6 campaign and procedure documents were received through the Admin WhatsApp channel. 4 updates were approved, 2 are in conflict review.",
+  "dash.admin.content": "This week, 6 maintenance procedures and instruction documents were received through the admin channel. 4 updates were approved, 2 are in conflict review.",
 
   // Language switcher
   "lang.tr": "TR",
   "lang.en": "EN",
-};
 
+  // Work Orders screen
+  "wo.title": "Work Order Assignment",
+  "wo.subtitle": "Chat with ToolA to create work orders, get the best technician recommendation, and assign in one click.",
+  "wo.tab.new": "New Work Order",
+  "wo.tab.open": "Open Work Orders",
+  "wo.tab.suggest": "Assignment Insights",
+  "wo.chat.title": "Create a work order with ToolA",
+  "wo.chat.placeholder": "e.g. Open a fault ticket for pump P-204, high priority, suggest the best technician",
+  "wo.chat.send": "Send",
+  "wo.chat.quick": "Quick examples",
+  "wo.summary.title": "Work Order Summary",
+  "wo.summary.subtitle": "A structured work order fills in on the right as you type.",
+  "wo.f.type": "Type",
+  "wo.f.title": "Title",
+  "wo.f.asset": "Equipment",
+  "wo.f.location": "Location",
+  "wo.f.desc": "Description",
+  "wo.f.priority": "Priority",
+  "wo.f.sla": "Target time / SLA",
+  "wo.f.skill": "Required skill",
+  "wo.f.suggested": "Suggested technicians",
+  "wo.f.assignee": "Assignee",
+  "wo.f.reason": "Assignment rationale",
+  "wo.f.parts": "Required parts / equipment",
+  "wo.f.notes": "Notes",
+  "wo.act.saveDraft": "Save draft",
+  "wo.act.create": "Create work order",
+  "wo.act.assign": "Assign & notify",
+  "wo.act.edit": "Edit",
+  "wo.type.fault": "Fault",
+  "wo.type.maint": "Maintenance",
+  "wo.type.install": "Install",
+  "wo.type.test": "Test",
+  "wo.open.title": "Open Work Orders",
+  "wo.open.col.id": "No",
+  "wo.open.col.title": "Title",
+  "wo.open.col.asset": "Equipment",
+  "wo.open.col.assignee": "Assignee",
+  "wo.open.col.priority": "Priority",
+  "wo.open.col.status": "Status",
+  "wo.open.col.age": "Age",
+  "wo.st.open": "Open",
+  "wo.st.assigned": "Assigned",
+  "wo.st.enroute": "En route",
+  "wo.st.onsite": "On site",
+  "wo.st.waiting": "Waiting",
+  "wo.st.done": "Completed",
+  "wo.sug.title": "Assignment Insights",
+  "wo.sug.reassign": "Needs reassignment",
+  "wo.sug.overdue": "Overdue jobs",
+  "wo.sug.busy": "Overloaded technicians",
+  "wo.sug.available": "Available technicians",
+  "wo.rec.title": "Recommended technician",
+  "wo.rec.reasons": "Why this technician",
+  "wo.rec.skill": "Skill match",
+  "wo.rec.similar": "Similar job experience",
+  "wo.rec.load": "Current workload",
+  "wo.rec.avail": "Availability",
+  "wo.rec.near": "Proximity to location",
+  "wo.rec.conflict": "Conflict check",
+};
 
 export const DICT: Record<Lang, Dict> = { tr, en };
 
-// Suggested AI questions per mode (retail-focused).
+// Suggested AI questions per mode (maintenance-focused).
 export const MODE_PROMPTS: Record<Lang, Record<string, string[]>> = {
   tr: {
     general: [
-      "Bu ay en çok hangi mağazalar iade prosedürü sordu?",
-      "En çok tekrar eden müşteri şikâyetleri neler?",
-      "Hangi mağazalarda stok farkı artıyor?",
-      "Kadıköy Mağazası’nda bu hafta hangi kritik olaylar oldu?",
+      "Son 30 günde en çok tekrar eden arıza ne?",
+      "Hangi ekipmanlarda aynı parça tekrar değişmiş?",
+      "Bugün açık kritik iş emirleri neler?",
+      "Kaplin hizalama gerektiren açık işler hangileri?",
     ],
     quality: [
-      "Fotoğraf kanıtı olmadan kapatılan kayıtları göster.",
-      "Hangi mağazalarda kapanış kalitesi en düşük?",
-      "Hangi konular eğitim ihtiyacı oluşturuyor?",
+      "Fotoğraf kanıtı olmadan kapatılan iş emirlerini göster.",
+      "Hangi tesislerde kapanış kalitesi en düşük?",
+      "Hangi arıza tipleri teknisyen eğitim ihtiyacı oluşturuyor?",
     ],
     compliance: [
-      "İade politikasıyla çelişen işlemler var mı?",
-      "Zorunlu fotoğraf kanıtı eksik kayıtları göster.",
-      "Kasa kapanışında en çok sorun yaşayan mağazalar hangileri?",
+      "Bakım prosedürüyle çelişen kapanışlar var mı?",
+      "Zorunlu ölçüm/kanıt eksik iş emirlerini göster.",
+      "LOTO adımı atlanmış işleri listele.",
     ],
     audit: [
-      "Kapandıktan sonra yeniden açılan kayıtlar hangileri?",
-      "Geçen hafta kapalı kayıtları kim düzenledi?",
-      "Hangi konular eğitim ihtiyacı oluşturuyor?",
+      "Kapandıktan sonra yeniden açılan iş emirleri hangileri?",
+      "Geçen hafta kapalı iş emirlerini kim düzenledi?",
+      "Hangi teknisyenin iş yükü en yüksek?",
     ],
     storefile: [
-      "Kadıköy Mağazası dosyasını özetle.",
-      "Bu mağaza kapanışında hangi ekipmanlar satışa çıkarılmalı?",
-      "Yeni mağaza adayı için lokasyon risklerini çıkar.",
-      "Cadde görünümü ve cephe fotoğraflarına göre açılış potansiyelini değerlendir.",
-      "Bursa Nilüfer taşıma dosyası için transfer planı öner.",
-      "Depoya alınacak ekipmanları ürün grubuna göre kır.",
-      "Hurda/geri dönüşüm önerilerini listele.",
-      "Mağaza kapanış raporu oluştur.",
+      "Pompa P-204 ekipman dosyasını özetle.",
+      "Bu ekipmanda son 12 ayda tekrar eden arızalar hangileri?",
+      "Yedek parça değişim geçmişini çıkar.",
+      "Kaplin hizalama işlemlerinin özetini ver.",
+      "Bu ekipman için önerilen önleyici bakım planını oluştur.",
     ],
   },
   en: {
     general: [
-      "Which stores asked the most return procedure questions this month?",
-      "What are the most recurring customer complaints?",
-      "Which stores have increasing stock mismatch issues?",
-      "What critical issues happened in Kadıköy Store this week?",
+      "What is the most recurring fault in the last 30 days?",
+      "Which equipment had the same part replaced repeatedly?",
+      "What are today's open critical work orders?",
+      "Which open jobs require coupling alignment?",
     ],
     quality: [
-      "Show records closed without photo evidence.",
-      "Which stores have the lowest closure quality?",
-      "Which topics create training needs?",
+      "Show work orders closed without photo evidence.",
+      "Which facilities have the lowest closure quality?",
+      "Which fault types create technician training needs?",
     ],
     compliance: [
-      "Are there any cases that conflict with the return policy?",
-      "Show records missing mandatory photo evidence.",
-      "Which stores struggle most with cash register closing?",
+      "Are there closures that conflict with the maintenance procedure?",
+      "Show work orders missing mandatory measurements/evidence.",
+      "List jobs where a LOTO step was skipped.",
     ],
     audit: [
-      "Which records were reopened after closing?",
-      "Who edited closed records last week?",
-      "Which topics create training needs?",
+      "Which work orders were reopened after closing?",
+      "Who edited closed work orders last week?",
+      "Which technician has the highest workload?",
     ],
     storefile: [
-      "Summarize the Kadıköy Store file.",
-      "Which equipment should be put up for sale in this store closure?",
-      "Identify location risks for the new store candidate.",
-      "Evaluate opening potential based on street view and frontage photos.",
-      "Suggest a transfer plan for the Bursa Nilüfer relocation file.",
-      "Break down warehouse items by product group.",
-      "List scrap/recycling recommendations.",
-      "Generate a store closure report.",
+      "Summarize the equipment file for pump P-204.",
+      "What recurring faults appear on this equipment in the last 12 months?",
+      "Extract the spare-part replacement history.",
+      "Give a summary of coupling alignment jobs.",
+      "Propose a preventive maintenance plan for this equipment.",
     ],
   },
 };
 
 export const MODE_PLACEHOLDER: Record<Lang, Record<string, string>> = {
   tr: {
-    general: "Kayıtlar, iadeler, stok, şikâyetler veya geçmiş olaylar hakkında sorun…",
-    quality: "Eksik alanlar, zayıf kayıtlar veya veri kalitesi hakkında sorun…",
+    general: "İş emirleri, arızalar, ekipmanlar, teknisyenler veya geçmiş bakımlar hakkında sorun…",
+    quality: "Eksik alanlar, kanıtsız kapanış veya veri kalitesi hakkında sorun…",
     compliance: "Prosedür uyumu, zorunlu kanıt veya uygunsuzluk hakkında sorun…",
     audit: "Kim neyi ne zaman ve neden değiştirdi diye sorun…",
-    storefile: "Açılış, kapanış, yenileme, taşıma, lokasyon fotoğrafları veya ekipman kararları hakkında sorun…",
+    storefile: "Ekipman dosyası, arıza geçmişi, yedek parça ve bakım planı hakkında sorun…",
   },
   en: {
-    general: "Ask about records, returns, stock, complaints or past cases…",
-    quality: "Ask about missing fields, weak records or data quality…",
+    general: "Ask about work orders, faults, equipment, technicians or past maintenance…",
+    quality: "Ask about missing fields, evidence-less closures or data quality…",
     compliance: "Ask about SOP adherence, mandatory evidence or non-compliance…",
     audit: "Ask who changed what, when and why…",
-    storefile: "Ask about openings, closures, renovations, relocations, location photos or equipment decisions…",
+    storefile: "Ask about equipment files, fault history, spare parts and maintenance plans…",
   },
 };
 
 export const MODE_DESCRIPTION: Record<Lang, Record<string, string>> = {
   tr: {
-    general: "Operasyonel kayıtları ara ve özetle",
+    general: "Bakım kayıtlarını ve iş emirlerini ara ve özetle",
     quality: "Eksik, tutarsız veya düşük kaliteli kayıtları bul",
-    compliance: "Kayıtları prosedürlere ve zorunlu alanlara göre kontrol et",
+    compliance: "İş emirlerini prosedürlere ve zorunlu alanlara göre kontrol et",
     audit: "Kimin neyi ne zaman değiştirdiğini incele",
-    storefile: "Açılış, kapanış, yenileme, taşıma, lokasyon fotoğrafları ve ekipman kararlarını analiz et.",
+    storefile: "Ekipman dosyası, arıza geçmişi, yedek parça ve bakım kararlarını analiz et.",
   },
   en: {
-    general: "Search and summarise operational records",
+    general: "Search and summarise maintenance records and work orders",
     quality: "Find incomplete, inconsistent or low-quality records",
-    compliance: "Check records against procedures and mandatory fields",
+    compliance: "Check work orders against procedures and mandatory fields",
     audit: "Review who changed what and when",
-    storefile: "Analyze openings, closures, renovations, relocations, location photos, and equipment decisions.",
+    storefile: "Analyze equipment files, fault history, spare parts and maintenance decisions.",
   },
 };
-
 
 export function translate(lang: Lang, key: string): string {
   return DICT[lang]?.[key] ?? DICT[DEFAULT_LANG][key] ?? key;
 }
 
-// ---- Dashboard demo data (retail central office) ----
+// ---- Dashboard demo data (maintenance central office) ----
 export type DemoMetric = { value: string; label: string };
 
 export const DEMO_METRICS: Record<Lang, DemoMetric[]> = {
   tr: [
-    { value: "842", label: "WhatsApp mesajı" },
-    { value: "43", label: "Açılan saha kaydı" },
-    { value: "218", label: "CRM’e işlenen not" },
-    { value: "12", label: "Açık kritik konu" },
-    { value: "7", label: "Eğitim ihtiyacı" },
+    { value: "342", label: "Açık iş emri" },
+    { value: "128", label: "Atanan iş emri" },
+    { value: "46", label: "Beklemede olan iş" },
+    { value: "512", label: "Tamamlanan iş (30g)" },
+    { value: "18", label: "Tekrar eden arıza" },
     { value: "124 saat", label: "Kurtarılan yönetici zamanı" },
   ],
   en: [
-    { value: "842", label: "WhatsApp messages" },
-    { value: "43", label: "Field records created" },
-    { value: "218", label: "CRM notes added" },
-    { value: "12", label: "Open critical issues" },
-    { value: "7", label: "Training needs" },
+    { value: "342", label: "Open work orders" },
+    { value: "128", label: "Assigned work orders" },
+    { value: "46", label: "Waiting jobs" },
+    { value: "512", label: "Completed (30d)" },
+    { value: "18", label: "Recurring faults" },
     { value: "124 h", label: "Manager time saved" },
   ],
 };
@@ -809,70 +920,70 @@ export type FlowItem = {
 export const DEMO_FIELD_FLOW: Record<Lang, FlowItem[]> = {
   tr: [
     {
-      name: "Ayşe · Kadıköy Mağazası",
-      message: "Müşteri faturasız iade istiyor, ne yapayım?",
-      event: "İade prosedürü",
-      location: "Kadıköy Mağazası",
-      priority: "Orta",
-      action: "Prosedür cevabı verildi, eğitim ihtiyacı işaretlendi",
-    },
-    {
-      name: "Mehmet · Ataşehir Mağazası",
-      message: "Stokta görünen ürün rafta yok.",
-      event: "Stok farkı",
-      location: "Ataşehir Mağazası",
+      name: "Ayşe · Gebze Fabrikası",
+      message: "Pompa P-204'te yüksek titreşim ve ses var.",
+      event: "Pompa arızası",
+      location: "Gebze · Hat 2",
       priority: "Yüksek",
-      action: "Stok kontrol kaydı oluşturuldu",
+      action: "İş emri açıldı, Ahmet Y. atandı",
     },
     {
-      name: "Zeynep · Cevahir Mağazası",
-      message: "Ürün hasarlı geldi, fotoğrafını attım.",
-      event: "Hasarlı ürün",
-      location: "Cevahir Mağazası",
-      priority: "Orta",
-      action: "Tedarikçi kalite kaydı açıldı",
-    },
-    {
-      name: "Emir · Bağdat Caddesi Mağazası",
-      message: "Kasa kapanışında fark çıktı.",
-      event: "Kasa farkı",
-      location: "Bağdat Caddesi Mağazası",
+      name: "Mehmet · İzmir Tesisi",
+      message: "Konveyör rulmanı sıcaklığı 78°C.",
+      event: "Rulman aşırı ısınma",
+      location: "İzmir · Paketleme",
       priority: "Yüksek",
-      action: "Müdür onayı bekliyor",
+      action: "Önleyici bakım iş emri oluşturuldu",
+    },
+    {
+      name: "Zeynep · Bursa Fabrikası",
+      message: "Kompresör basıncı düşüyor, hava kaçağı var.",
+      event: "Hava kaçağı",
+      location: "Bursa · Utility",
+      priority: "Orta",
+      action: "Kontrol iş emri açıldı",
+    },
+    {
+      name: "Emir · Kocaeli Tesisi",
+      message: "Elektrik panosunda alarm veriyor.",
+      event: "Pano alarmı",
+      location: "Kocaeli · Ana Pano",
+      priority: "Yüksek",
+      action: "Elektrik teknisyeni yönlendirildi",
     },
   ],
   en: [
     {
-      name: "Ayşe · Kadıköy Store",
-      message: "A customer wants to return an item without an invoice. What should I do?",
-      event: "Return procedure",
-      location: "Kadıköy Store",
-      priority: "Medium",
-      action: "Procedure answer sent, training need flagged",
-    },
-    {
-      name: "Mehmet · Ataşehir Store",
-      message: "An item appears in stock but is not on the shelf.",
-      event: "Stock mismatch",
-      location: "Ataşehir Store",
+      name: "Ayşe · Gebze Plant",
+      message: "Pump P-204 has high vibration and noise.",
+      event: "Pump fault",
+      location: "Gebze · Line 2",
       priority: "High",
-      action: "Stock check record created",
+      action: "Work order opened, assigned to Ahmet Y.",
     },
     {
-      name: "Zeynep · Cevahir Store",
-      message: "The product arrived damaged. I sent a photo.",
-      event: "Damaged product",
-      location: "Cevahir Store",
-      priority: "Medium",
-      action: "Supplier quality record opened",
-    },
-    {
-      name: "Emir · Bağdat Avenue Store",
-      message: "There was a difference during cash register closing.",
-      event: "Cash register difference",
-      location: "Bağdat Avenue Store",
+      name: "Mehmet · Izmir Facility",
+      message: "Conveyor bearing temperature at 78°C.",
+      event: "Bearing overheat",
+      location: "Izmir · Packaging",
       priority: "High",
-      action: "Waiting for manager approval",
+      action: "Preventive work order created",
+    },
+    {
+      name: "Zeynep · Bursa Plant",
+      message: "Compressor pressure dropping, air leak suspected.",
+      event: "Air leak",
+      location: "Bursa · Utility",
+      priority: "Medium",
+      action: "Inspection work order opened",
+    },
+    {
+      name: "Emir · Kocaeli Facility",
+      message: "Main electrical panel is alarming.",
+      event: "Panel alarm",
+      location: "Kocaeli · Main Panel",
+      priority: "High",
+      action: "Electrical technician dispatched",
     },
   ],
 };
@@ -881,18 +992,18 @@ export type RecurringItem = { topic: string; detail: string };
 
 export const DEMO_RECURRING: Record<Lang, RecurringItem[]> = {
   tr: [
-    { topic: "İade prosedürü", detail: "92 kez soruldu" },
-    { topic: "Kasa kapanışı", detail: "68 kez soruldu" },
-    { topic: "Stok farkı", detail: "54 kayıt" },
-    { topic: "Hasarlı ürün", detail: "38 kayıt" },
-    { topic: "Müşteri şikâyeti", detail: "24 kayıt" },
+    { topic: "Pompa titreşimi", detail: "24 iş emri" },
+    { topic: "Rulman aşırı ısınma", detail: "18 iş emri" },
+    { topic: "Hava kaçağı", detail: "15 iş emri" },
+    { topic: "Kaplin hizalama", detail: "11 iş emri" },
+    { topic: "Elektrik pano alarmı", detail: "9 iş emri" },
   ],
   en: [
-    { topic: "Return procedure", detail: "asked 92 times" },
-    { topic: "Cash register closing", detail: "asked 68 times" },
-    { topic: "Stock mismatch", detail: "54 records" },
-    { topic: "Damaged product", detail: "38 records" },
-    { topic: "Customer complaint", detail: "24 records" },
+    { topic: "Pump vibration", detail: "24 work orders" },
+    { topic: "Bearing overheat", detail: "18 work orders" },
+    { topic: "Air leak", detail: "15 work orders" },
+    { topic: "Coupling alignment", detail: "11 work orders" },
+    { topic: "Panel alarm", detail: "9 work orders" },
   ],
 };
 
@@ -903,68 +1014,67 @@ export const PRIORITY_CLASS: Record<string, string> = {
   Medium: "bg-amber-100 text-amber-800",
 };
 
-// Retail-focused data source cards
+// Maintenance-focused data source cards
 export type SourceItem = { title: string; text: string; status: "Connected" | "Syncing" | "Setup" };
 
 export const DS_WHATSAPP: Record<Lang, SourceItem[]> = {
   tr: [
-    { title: "WhatsApp İş Mesajları", text: "Mağaza ekiplerinden gelen sorular ve görev mesajları.", status: "Connected" },
-    { title: "Sesli Notlar", text: "Saha ekiplerinin sesli mesaj ve notları.", status: "Syncing" },
-    { title: "Fotoğraf ve Dokümanlar", text: "Mağazadan paylaşılan fotoğraf, fiş ve belgeler.", status: "Connected" },
+    { title: "Saha Bildirim Mesajları", text: "Tesis ekiplerinden gelen arıza ve talep mesajları.", status: "Connected" },
+    { title: "Sesli Notlar", text: "Teknisyenlerin sesli mesaj ve saha notları.", status: "Syncing" },
+    { title: "Fotoğraf ve Ölçümler", text: "Sahadan paylaşılan fotoğraf, termal görüntü ve ölçüm dosyaları.", status: "Connected" },
   ],
   en: [
-    { title: "WhatsApp Business Messages", text: "Questions and task messages from store teams.", status: "Connected" },
-    { title: "Voice Notes", text: "Voice messages and notes from field teams.", status: "Syncing" },
-    { title: "Photos & Documents", text: "Photos, receipts and documents shared from stores.", status: "Connected" },
+    { title: "Field Alert Messages", text: "Fault and request messages from facility teams.", status: "Connected" },
+    { title: "Voice Notes", text: "Technician voice messages and field notes.", status: "Syncing" },
+    { title: "Photos & Measurements", text: "Photos, thermal images and measurement files from the field.", status: "Connected" },
   ],
 };
 
 export const DS_KNOWLEDGE: Record<Lang, SourceItem[]> = {
   tr: [
-    { title: "İade Politikası PDF", text: "Güncel iade ve değişim kuralları.", status: "Connected" },
-    { title: "Mağaza Operasyon Kılavuzu", text: "Günlük operasyon ve açılış/kapanış prosedürleri.", status: "Connected" },
-    { title: "Kasa Kapanış Prosedürü", text: "Kasa sayımı ve kapanış adımları.", status: "Setup" },
-    { title: "Kampanya ve Fiyat Listeleri", text: "Güncel kampanya, indirim ve fiyat bilgileri.", status: "Syncing" },
+    { title: "Bakım Prosedürleri PDF", text: "Güncel önleyici ve düzeltici bakım talimatları.", status: "Connected" },
+    { title: "Ekipman El Kitapları", text: "Üretici manuel ve teknik dokümanları.", status: "Connected" },
+    { title: "LOTO Prosedürü", text: "Kilitleme/etiketleme güvenlik adımları.", status: "Setup" },
+    { title: "Yedek Parça Katalogları", text: "Parça kodları, stok ve tedarikçi bilgileri.", status: "Syncing" },
   ],
   en: [
-    { title: "Return Policy PDF", text: "Up-to-date return and exchange rules.", status: "Connected" },
-    { title: "Store Operations Guide", text: "Daily operations and open/close procedures.", status: "Connected" },
-    { title: "Cash Register Closing Procedure", text: "Cash counting and closing steps.", status: "Setup" },
-    { title: "Campaign & Price Lists", text: "Current campaigns, discounts and prices.", status: "Syncing" },
+    { title: "Maintenance Procedures PDF", text: "Current preventive and corrective maintenance instructions.", status: "Connected" },
+    { title: "Equipment Manuals", text: "Vendor manuals and technical documentation.", status: "Connected" },
+    { title: "LOTO Procedure", text: "Lockout/tagout safety steps.", status: "Setup" },
+    { title: "Spare Parts Catalogs", text: "Part codes, stock and supplier information.", status: "Syncing" },
   ],
 };
 
 export const DS_OPERATIONS: Record<Lang, SourceItem[]> = {
   tr: [
-    { title: "CRM", text: "Müşteri kayıtları, notlar ve takip işlemleri.", status: "Connected" },
-    { title: "Google Sheets", text: "Operasyon tabloları ve takip listeleri.", status: "Syncing" },
-    { title: "ERP / Stok Sistemi", text: "Stok seviyeleri, ürün ve sipariş verileri.", status: "Setup" },
-    { title: "Ticket / Görev Sistemi", text: "Açık görevler, talepler ve iş takibi.", status: "Setup" },
+    { title: "CMMS", text: "İş emri, ekipman ve bakım planı verisi.", status: "Connected" },
+    { title: "SCADA / IoT", text: "Sensör verileri, alarm ve durum bilgileri.", status: "Syncing" },
+    { title: "ERP / Stok Sistemi", text: "Yedek parça stoğu ve satın alma verisi.", status: "Setup" },
+    { title: "Ticket / Görev Sistemi", text: "Açık talepler ve iş takibi.", status: "Setup" },
   ],
   en: [
-    { title: "CRM", text: "Customer records, notes and follow-ups.", status: "Connected" },
-    { title: "Google Sheets", text: "Operations spreadsheets and tracking lists.", status: "Syncing" },
-    { title: "ERP / Stock System", text: "Stock levels, product and order data.", status: "Setup" },
-    { title: "Ticket / Task System", text: "Open tasks, requests and work tracking.", status: "Setup" },
+    { title: "CMMS", text: "Work order, equipment and maintenance plan data.", status: "Connected" },
+    { title: "SCADA / IoT", text: "Sensor data, alarms and status information.", status: "Syncing" },
+    { title: "ERP / Stock System", text: "Spare part stock and purchasing data.", status: "Setup" },
+    { title: "Ticket / Task System", text: "Open requests and job tracking.", status: "Setup" },
   ],
 };
 
-
-// ---- WhatsApp channel structure demo (frontend-only) ----
+// ---- Field channel structure demo (frontend-only) ----
 export type ChannelCard = { title: string; detail: string; status: string };
 
 export const WA_CHANNELS: Record<Lang, ChannelCard[]> = {
   tr: [
-    { title: "Türkiye Saha Kanalı", detail: "148 mağaza · Mağaza soruları, iade, stok, şikâyet, fotoğraf", status: "Demo" },
-    { title: "Romanya Saha Kanalı", detail: "72 mağaza · Yerel prosedür ve mağaza operasyonları", status: "Bağlı değil" },
-    { title: "Kazakistan Saha Kanalı", detail: "54 mağaza · Yerel dilde saha destek akışı", status: "Yakında" },
-    { title: "Admin Bilgi Güncelleme Kanalı", detail: "Kampanya, prosedür, doküman ve duyuru güncellemeleri", status: "Onay akışı" },
+    { title: "Türkiye Saha Kanalı", detail: "12 tesis · Arıza, bakım talebi, fotoğraf ve ölçüm", status: "Demo" },
+    { title: "Romanya Saha Kanalı", detail: "4 tesis · Yerel bakım operasyonları", status: "Bağlı değil" },
+    { title: "Kazakistan Saha Kanalı", detail: "3 tesis · Yerel dilde saha destek akışı", status: "Yakında" },
+    { title: "Yönetici Bilgi Güncelleme Kanalı", detail: "Prosedür, talimat ve doküman güncellemeleri", status: "Onay akışı" },
   ],
   en: [
-    { title: "Türkiye Field Channel", detail: "148 stores · Store questions, returns, stock, complaints, photos", status: "Demo" },
-    { title: "Romania Field Channel", detail: "72 stores · Local procedures and store operations", status: "Not connected" },
-    { title: "Kazakhstan Field Channel", detail: "54 stores · Local-language field support flow", status: "Coming soon" },
-    { title: "Admin Knowledge Update Channel", detail: "Campaign, procedure, document, and announcement updates", status: "Approval flow" },
+    { title: "Türkiye Field Channel", detail: "12 facilities · Faults, maintenance requests, photos, measurements", status: "Demo" },
+    { title: "Romania Field Channel", detail: "4 facilities · Local maintenance operations", status: "Not connected" },
+    { title: "Kazakhstan Field Channel", detail: "3 facilities · Local-language field support flow", status: "Coming soon" },
+    { title: "Admin Knowledge Update Channel", detail: "Procedure, instruction and document updates", status: "Approval flow" },
   ],
 };
 
@@ -973,13 +1083,13 @@ export type PhoneMapping = { phone: string; mapping: string };
 
 export const PHONE_MAPPINGS: Record<Lang, PhoneMapping[]> = {
   tr: [
-    { phone: "+90 5XX XXX XX XX", mapping: "Mağaza Müdürü · Türkiye · Kadıköy Mağazası" },
-    { phone: "+40 7XX XXX XXX", mapping: "Bölge Müdürü · Romanya · Bükreş Bölgesi" },
-    { phone: "+90 5XX XXX XX XX", mapping: "Merkez Operasyon · Admin Bilgi Güncelleme" },
+    { phone: "+90 5XX XXX XX XX", mapping: "Bakım Şefi · Türkiye · Gebze Fabrikası" },
+    { phone: "+40 7XX XXX XXX", mapping: "Bölge Bakım Müdürü · Romanya · Bükreş" },
+    { phone: "+90 5XX XXX XX XX", mapping: "Merkez Operasyon · Yönetici Bilgi Güncelleme" },
   ],
   en: [
-    { phone: "+90 5XX XXX XX XX", mapping: "Store Manager · Türkiye · Kadıköy Store" },
-    { phone: "+40 7XX XXX XXX", mapping: "Regional Manager · Romania · Bucharest Region" },
+    { phone: "+90 5XX XXX XX XX", mapping: "Maintenance Lead · Türkiye · Gebze Plant" },
+    { phone: "+40 7XX XXX XXX", mapping: "Regional Maint. Manager · Romania · Bucharest" },
     { phone: "+90 5XX XXX XX XX", mapping: "HQ Operations · Admin Knowledge Update" },
   ],
 };
@@ -989,13 +1099,13 @@ export type KnowledgeDraft = { title: string; meta: string; ai: string; ready: b
 
 export const KNOWLEDGE_DRAFTS: Record<Lang, KnowledgeDraft[]> = {
   tr: [
-    { title: "Yaz İndirimi Kampanyası.pdf", meta: "Türkiye · Tüm mağazalar · 15-31 Temmuz · Onay bekliyor", ai: "Kampanya kuralları, geçerlilik tarihi ve iade istisnaları algılandı.", ready: false },
-    { title: "İade Politikası Güncellemesi.docx", meta: "Romanya · Seçili mağazalar · Onay bekliyor", ai: "Eski iade politikasıyla olası çakışma bulundu.", ready: false },
-    { title: "Kasa Kapanış Prosedürü.pdf", meta: "Tüm ülkeler · Yayına hazır", ai: "Prosedür özeti ve mağaza rol kapsamı çıkarıldı.", ready: true },
+    { title: "Pompa Bakım Talimatı v3.pdf", meta: "Türkiye · Tüm tesisler · Onay bekliyor", ai: "Bakım adımları, tork değerleri ve LOTO gereksinimleri algılandı.", ready: false },
+    { title: "Kaplin Hizalama Prosedürü.docx", meta: "Romanya · Seçili tesisler · Onay bekliyor", ai: "Önceki prosedürle olası çakışma bulundu.", ready: false },
+    { title: "LOTO Talimatı.pdf", meta: "Tüm ülkeler · Yayına hazır", ai: "Prosedür özeti ve rol kapsamı çıkarıldı.", ready: true },
   ],
   en: [
-    { title: "Summer Discount Campaign.pdf", meta: "Türkiye · All stores · July 15-31 · Pending approval", ai: "Campaign rules, effective dates, and return exceptions detected.", ready: false },
-    { title: "Return Policy Update.docx", meta: "Romania · Selected stores · Pending approval", ai: "Possible conflict with the previous return policy found.", ready: false },
-    { title: "Cash Register Closing Procedure.pdf", meta: "All countries · Ready to publish", ai: "Procedure summary and store role scope extracted.", ready: true },
+    { title: "Pump Maintenance Instruction v3.pdf", meta: "Türkiye · All facilities · Pending approval", ai: "Maintenance steps, torque values and LOTO requirements detected.", ready: false },
+    { title: "Coupling Alignment Procedure.docx", meta: "Romania · Selected facilities · Pending approval", ai: "Possible conflict with the previous procedure found.", ready: false },
+    { title: "LOTO Instruction.pdf", meta: "All countries · Ready to publish", ai: "Procedure summary and role scope extracted.", ready: true },
   ],
 };
