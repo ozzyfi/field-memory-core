@@ -1,4 +1,4 @@
-// Lightweight dictionary-based i18n for saha.team (frontend-only).
+// Lightweight dictionary-based i18n for ToolA (frontend-only).
 // Default language: Turkish. No external i18n library.
 
 export type Lang = "tr" | "en";
@@ -182,7 +182,7 @@ const tr: Dict = {
   "login.authFailed": "Kimlik doğrulama başarısız",
 
   // Onboarding
-  "onboard.welcome": "saha.team’e hoş geldiniz",
+  "onboard.welcome": "ToolA’e hoş geldiniz",
   "onboard.dash.1": "WhatsApp kanalını bağla",
   "onboard.dash.2": "Mağaza mesajlarını kayıt ve aksiyona dönüştür",
   "onboard.dash.3": "Merkez panelden tekrar eden konuları ve eğitim ihtiyaçlarını takip et",
@@ -230,7 +230,7 @@ const tr: Dict = {
   "audit.user": "Kullanıcı",
 
   // API / MCP
-  "api.subtitle": "saha.team saha hafızasını kurumsal agent’lara ve kendi uygulamalarınıza açın.",
+  "api.subtitle": "ToolA saha hafızasını kurumsal agent’lara ve kendi uygulamalarınıza açın.",
   "api.createKey": "Anahtar oluştur",
   "api.mcpEndpoint": "MCP Endpoint",
   "api.mcpDesc": "Claude, Cursor, ChatGPT connector veya custom agent’lar için model-bağımsız erişim.",
@@ -314,7 +314,7 @@ const tr: Dict = {
 
   // Phone mapping (demo)
   "pm.title": "Telefon Numarası → Rol ve Lokasyon Eşleştirme",
-  "pm.body": "WhatsApp’tan gelen telefon numarası, kişiyi tanımak için kullanılır. saha.team bu kişiyi rol, ülke, bölge, mağaza ve yetki bilgileriyle eşleştirir.",
+  "pm.body": "WhatsApp’tan gelen telefon numarası, kişiyi tanımak için kullanılır. ToolA bu kişiyi rol, ülke, bölge, mağaza ve yetki bilgileriyle eşleştirir.",
   "pm.example": "Örnek eşleştirme",
 
   // Knowledge update drafts (demo)
@@ -510,7 +510,7 @@ const en: Dict = {
   "login.authFailed": "Authentication failed",
 
   // Onboarding
-  "onboard.welcome": "Welcome to saha.team",
+  "onboard.welcome": "Welcome to ToolA",
   "onboard.dash.1": "Connect the WhatsApp channel",
   "onboard.dash.2": "Turn store messages into records and actions",
   "onboard.dash.3": "Track recurring topics and training needs from the central dashboard",
@@ -558,7 +558,7 @@ const en: Dict = {
   "audit.user": "User",
 
   // API / MCP
-  "api.subtitle": "Open saha.team field memory to enterprise agents and your own apps.",
+  "api.subtitle": "Open ToolA field memory to enterprise agents and your own apps.",
   "api.createKey": "Create key",
   "api.mcpEndpoint": "MCP Endpoint",
   "api.mcpDesc": "Model-agnostic access for Claude, Cursor, ChatGPT connector or custom agents.",
@@ -642,7 +642,7 @@ const en: Dict = {
 
   // Phone mapping (demo)
   "pm.title": "Phone Number → Role and Location Mapping",
-  "pm.body": "The incoming WhatsApp phone number is used to identify the contact. saha.team maps the contact to role, country, region, store, and permission scope.",
+  "pm.body": "The incoming WhatsApp phone number is used to identify the contact. ToolA maps the contact to role, country, region, store, and permission scope.",
   "pm.example": "Example mapping",
 
   // Knowledge update drafts (demo)

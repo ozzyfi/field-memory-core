@@ -102,11 +102,11 @@ export const PATH_TO_SCREEN: Record<string, Screen> = {
 };
 
 export function LogoMark({ className = "h-6 w-6" }: { className?: string }) {
-  return <img src={sahaMark} alt="saha.team" className={className} />;
+  return <img src={sahaMark} alt="ToolA" className={className} />;
 }
 
 export function LogoFull({ className = "h-7" }: { className?: string }) {
-  return <img src={sahaLogo} alt="saha.team" className={`${className} w-auto`} />;
+  return <img src={sahaLogo} alt="ToolA" className={`${className} w-auto`} />;
 }
 
 export function CodeBlock({ children }: { children: string }) {
@@ -180,7 +180,7 @@ export function SidebarContents({ active, onNavigate }: { active: Screen; onNavi
                 </div>
                 <div className="min-w-0">
                   <div className="text-sm text-foreground truncate">{workspaceName(user?.email)}</div>
-                  <div className="text-[11px] text-muted-foreground truncate">saha.team</div>
+                  <div className="text-[11px] text-muted-foreground truncate">ToolA</div>
                 </div>
               </div>
               <ChevronDown className="h-4 w-4 text-muted-foreground shrink-0" />
@@ -321,7 +321,7 @@ export default function Index() {
   const [mobileOpen, setMobileOpen] = useState(false);
 
   useEffect(() => {
-    document.title = `saha.team — ${SCREEN_LABEL[active]}`;
+    document.title = `ToolA — ${SCREEN_LABEL[active]}`;
   }, [active]);
 
   return (
