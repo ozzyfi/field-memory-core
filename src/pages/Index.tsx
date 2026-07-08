@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import {
   LayoutDashboard,
-  PackageOpen,
+  ClipboardList,
   Database,
   Sparkles,
   MessagesSquare,
@@ -30,10 +30,8 @@ import { useAuth } from "@/contexts/AuthContext";
 import { useUserOrg } from "@/hooks/useUserOrg";
 import { useLanguage } from "@/hooks/useLanguage";
 import { LanguageSwitcher } from "@/components/LanguageSwitcher";
-import sahaLogo from "@/assets/saha-logo.png";
-import sahaMark from "@/assets/saha-mark.png";
 import { DashboardScreen } from "@/pages/screens/DashboardScreen";
-import { BranchEquipmentScreen } from "@/pages/screens/BranchEquipmentScreen";
+import { WorkOrdersScreen } from "@/pages/screens/WorkOrdersScreen";
 import { DataSourcesScreen } from "@/pages/screens/DataSourcesScreen";
 import { AIChatScreen } from "@/pages/screens/AIChatScreen";
 import { AIClientsScreen } from "@/pages/screens/AIClientsScreen";
@@ -51,11 +49,11 @@ export const dismissOnboarding = (key: string) => {
   try { localStorage.setItem(key, "true"); } catch { /* ignore */ }
 };
 
-export type Screen = "dashboard" | "branch-equipment" | "ai-chat" | "data-sources" | "ai-clients" | "data-quality" | "api" | "audit" | "billing";
+export type Screen = "dashboard" | "work-orders" | "ai-chat" | "data-sources" | "ai-clients" | "data-quality" | "api" | "audit" | "billing";
 
 export const NAV: { id: Screen; label: string; icon: React.ComponentType<{ className?: string }> }[] = [
   { id: "dashboard", label: "Dashboard", icon: LayoutDashboard },
-  { id: "branch-equipment", label: "Branch Equipment", icon: PackageOpen },
+  { id: "work-orders", label: "Work Orders", icon: ClipboardList },
   { id: "ai-chat", label: "AI Chat", icon: MessagesSquare },
   { id: "data-sources", label: "Data Sources", icon: Database },
   { id: "ai-clients", label: "AI Clients", icon: Sparkles },
@@ -67,7 +65,7 @@ export const NAV: { id: Screen; label: string; icon: React.ComponentType<{ class
 
 export const SCREEN_LABEL: Record<Screen, string> = {
   dashboard: "Dashboard",
-  "branch-equipment": "Branch Equipment",
+  "work-orders": "Branch Equipment",
   "ai-chat": "AI Chat",
   "data-sources": "Data Sources",
   "ai-clients": "AI Clients",
@@ -79,7 +77,7 @@ export const SCREEN_LABEL: Record<Screen, string> = {
 
 export const SCREEN_TO_PATH: Record<Screen, string> = {
   dashboard: "/",
-  "branch-equipment": "/branch-equipment",
+  "work-orders": "/work-orders",
   "ai-chat": "/ai-chat",
   "data-sources": "/data-sources",
   "ai-clients": "/ai-clients",
@@ -91,7 +89,7 @@ export const SCREEN_TO_PATH: Record<Screen, string> = {
 
 export const PATH_TO_SCREEN: Record<string, Screen> = {
   "/": "dashboard",
-  "/branch-equipment": "branch-equipment",
+  "/work-orders": "work-orders",
   "/ai-chat": "ai-chat",
   "/data-sources": "data-sources",
   "/ai-clients": "ai-clients",
@@ -102,11 +100,18 @@ export const PATH_TO_SCREEN: Record<string, Screen> = {
 };
 
 export function LogoMark({ className = "h-6 w-6" }: { className?: string }) {
-  return <img src={sahaMark} alt="ToolA" className={className} />;
+  return (
+    <span aria-label="ToolA" className={`inline-flex items-center justify-center rounded bg-primary text-primary-foreground font-serif ${className}`}>T</span>
+  );
 }
 
 export function LogoFull({ className = "h-7" }: { className?: string }) {
-  return <img src={sahaLogo} alt="ToolA" className={`${className} w-auto`} />;
+  return (
+    <span className={`inline-flex items-baseline font-serif text-2xl tracking-tight ${className}`}>
+      <span className="text-primary">Tool</span>
+      <span className="text-copper">A</span>
+    </span>
+  );
 }
 
 export function CodeBlock({ children }: { children: string }) {
@@ -338,7 +343,7 @@ export default function Index() {
         <MobileTopBar active={active} onMenu={() => setMobileOpen(true)} />
         <div className="max-w-[1280px] mx-auto px-6 lg:px-12 py-10 lg:py-14">
           {active === "dashboard" && <DashboardScreen showOnboarding={showOnboarding} onClose={() => { dismissOnboarding(ONBOARDING_DASHBOARD_KEY); setShowOnboarding(false); }} />}
-          {active === "branch-equipment" && <BranchEquipmentScreen />}
+          {active === "work-orders" && <WorkOrdersScreen />}
           {active === "ai-chat" && <AIChatScreen />}
           {active === "data-sources" && <DataSourcesScreen />}
           {active === "ai-clients" && <AIClientsScreen />}
