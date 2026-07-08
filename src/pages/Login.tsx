@@ -3,16 +3,18 @@ import { useNavigate } from "react-router-dom";
 import { supabase } from "@/lib/supabase";
 import { useAuth } from "@/contexts/AuthContext";
 import { useLanguage } from "@/hooks/useLanguage";
-import sahaLogo from "@/assets/saha-logo.png";
+import { LogoFull } from "@/pages/Index";
 
+const DEMO_EMAIL = "info@toola.net";
+const DEMO_PASSWORD = "ozgur123";
 
 export default function Login() {
   const navigate = useNavigate();
   const { user } = useAuth();
   const { t } = useLanguage();
   const [mode, setMode] = useState<"signin" | "signup">("signin");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState(DEMO_EMAIL);
+  const [password, setPassword] = useState(DEMO_PASSWORD);
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
 
@@ -20,6 +22,36 @@ export default function Login() {
   useEffect(() => {
     if (user) navigate("/", { replace: true });
   }, [user, navigate]);
+
+  const demoLogin = async () => {
+    setError(null);
+    setLoading(true);
+    try {
+      let { error } = await supabase.auth.signInWithPassword({
+        email: DEMO_EMAIL,
+        password: DEMO_PASSWORD,
+      });
+      if (error) {
+        // Auto-provision the demo account on first run.
+        const { error: signUpErr } = await supabase.auth.signUp({
+          email: DEMO_EMAIL,
+          password: DEMO_PASSWORD,
+          options: { emailRedirectTo: `${window.location.origin}/` },
+        });
+        if (signUpErr && !/registered/i.test(signUpErr.message)) throw signUpErr;
+        ({ error } = await supabase.auth.signInWithPassword({
+          email: DEMO_EMAIL,
+          password: DEMO_PASSWORD,
+        }));
+        if (error) throw error;
+      }
+      navigate("/", { replace: true });
+    } catch (err: any) {
+      setError(err.message ?? t("login.authFailed"));
+    } finally {
+      setLoading(false);
+    }
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -49,7 +81,7 @@ export default function Login() {
   return (
     <div className="min-h-screen bg-background flex items-center justify-center px-6">
       <div className="w-full max-w-sm border border-border rounded-lg bg-card p-8">
-        <img src={sahaLogo} alt="ToolA" className="h-8 w-auto mb-6" />
+        <div className="mb-6"><LogoFull className="h-8" /></div>
         <h1 className="font-serif text-2xl text-foreground mb-1">
           {mode === "signin" ? t("login.signin") : t("login.signup")}
         </h1>
@@ -91,6 +123,15 @@ export default function Login() {
             {loading ? t("login.wait") : mode === "signin" ? t("login.signinBtn") : t("login.signupBtn")}
           </button>
         </form>
+
+        <button
+          type="button"
+          onClick={demoLogin}
+          disabled={loading}
+          className="mt-3 w-full h-10 rounded-md border border-border bg-background text-sm text-foreground hover:bg-muted disabled:opacity-60"
+        >
+          Demo hesabıyla giriş yap · {DEMO_EMAIL}
+        </button>
 
         <button
           onClick={() => { setMode(mode === "signin" ? "signup" : "signin"); setError(null); }}

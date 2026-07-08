@@ -65,7 +65,7 @@ export const NAV: { id: Screen; label: string; icon: React.ComponentType<{ class
 
 export const SCREEN_LABEL: Record<Screen, string> = {
   dashboard: "Dashboard",
-  "work-orders": "Branch Equipment",
+  "work-orders": "Work Orders",
   "ai-chat": "AI Chat",
   "data-sources": "Data Sources",
   "ai-clients": "AI Clients",
